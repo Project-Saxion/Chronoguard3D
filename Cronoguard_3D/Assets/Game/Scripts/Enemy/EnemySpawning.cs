@@ -16,6 +16,7 @@ namespace Game.Scripts.Enemy
         public float scalingPercentage = 1.2f;
         public int setValueScaling = 50;
         public int startPointAmount = 100;
+        public int enemySpawnHeight = 1;
         
     
         public void spawnWave(int wave)
@@ -44,8 +45,8 @@ namespace Game.Scripts.Enemy
             {
                 float angleInRadians = Mathf.Deg2Rad * (angleStep * i);
                 float x = Mathf.Cos(angleInRadians) * radius;
-                float y = Mathf.Sin(angleInRadians) * radius;
-                spawnLocations[i] = new Vector3(x, y, 0);
+                float z = Mathf.Sin(angleInRadians) * radius;
+                spawnLocations[i] = new Vector3(x, enemySpawnHeight, z);
             } 
             
             enemyScaling = GetComponent<EnemyScaling>();
@@ -64,7 +65,7 @@ namespace Game.Scripts.Enemy
                     int temp = UnityEngine.Random.Range(0, numberOfPoints);
                     Vector3 spawnLocation = spawnLocations[temp];
                     GameObject spawnEnemy = Instantiate(enemies[i], spawnLocation, parentObject.transform.rotation, parentObject.transform);
-                    spawnEnemy.GetComponent<HealthController>().setHealth(healthEnemy);
+                    // spawnEnemy.GetComponent<HealthController>().setHealth(healthEnemy);
                 }
             }
         }
