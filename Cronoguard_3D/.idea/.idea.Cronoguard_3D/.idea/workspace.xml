@@ -5,13 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="673bce76-43e8-45dd-851c-238457cf881a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.Cronoguard_3D/.idea/projectSettingsUpdater.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Cronoguard_3D/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Cronoguard_3D/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Developers/Nick/SceneNick.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Developers/Nick/SceneNick.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Turret/ShootingSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Turret/ShootingSystem.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Enemy/BasicEnemyController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Enemy/BasicEnemyController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Enemy/RangedEnemy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Enemy/RangedEnemy.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/vFolders/vFolders Data.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/vFolders/vFolders Data.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/QualitySettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/QualitySettings.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2022.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2022.dwlt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/Search.settings" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Search.settings" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,6 +20,7 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/30adf90198bc4c4b83910c6fb1877998174000/99/37f7604f/Object.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Enemy/BasicEnemyController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Enemy/MeleeEnemy.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Enemy/RangedEnemy.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Generic/ObjectPool.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
@@ -95,7 +95,7 @@
       <option name="presentableId" value="Default" />
       <updated>1702976080727</updated>
       <workItem from="1702976084311" duration="2321000" />
-      <workItem from="1703154547585" duration="3491000" />
+      <workItem from="1703154547585" duration="6421000" />
     </task>
     <servers />
   </component>
