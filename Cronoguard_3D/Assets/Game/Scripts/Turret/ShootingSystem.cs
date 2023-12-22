@@ -4,15 +4,22 @@ using UnityEngine;
 
 public class ShootingSystem : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private Transform shootPoint;
+    [SerializeField] private int attackDamage;
+    [SerializeField] private int shootForce;
 
-    // Update is called once per frame
-    void Update()
+    public void Attack(string _tagToDamage)
     {
-        
+        GameObject bullet = ObjectPool.SharedInstance.GetPooledObject();
+        if (bullet != null)
+        {
+            bullet.transform.position = shootPoint.position;
+            bullet.transform.rotation = shootPoint.rotation;
+            bullet.SetActive(true);
+        }
+        BulletController bulletController = bullet.GetComponent<BulletController>();
+        bulletController.damage = attackDamage;
+        bulletController.tagToDamage = _tagToDamage;
+        bulletController.FireBullet(shootForce);
     }
 }
