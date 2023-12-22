@@ -1,6 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Quaternion = UnityEngine.Quaternion;
+using Vector3 = UnityEngine.Vector3;
 
 public class TrackingSystem : MonoBehaviour
 {
@@ -8,14 +8,11 @@ public class TrackingSystem : MonoBehaviour
     
     public void Rotate(GameObject target, float speed)
     {
-        Vector3 targetDir = target.transform.position - transform.position;
-        float angle = Mathf.Atan2(targetDir.y, targetDir.x) * Mathf.Rad2Deg;
-               
-        Quaternion desiredRotation = Quaternion.Euler(0f, 0f, angle - 90f);
+        Quaternion desiredRotation = Quaternion.LookRotation(target.transform.position - transform.position);
         if (transform.rotation != desiredRotation)
         {
             rotating = true;
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, desiredRotation, speed * Time.deltaTime);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, desiredRotation, speed);
         }
         else
         {

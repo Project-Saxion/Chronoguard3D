@@ -27,7 +27,7 @@ public class RangedEnemy : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            shootingSystem.Attack("Player");
+            // shootingSystem.Attack("Player");
         }
     }
 
