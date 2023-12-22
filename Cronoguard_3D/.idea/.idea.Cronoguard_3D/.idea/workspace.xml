@@ -4,12 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+<<<<<<< Updated upstream
     <list default="true" id="673bce76-43e8-45dd-851c-238457cf881a" name="Changes" comment="">
       <change afterPath="$PROJECT_DIR$/.idea/.idea.Cronoguard_3D/.idea/projectSettingsUpdater.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Developers/Nick/SceneNick.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Developers/Nick/SceneNick.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Turret/ShootingSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Turret/ShootingSystem.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/vFolders/vFolders Data.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/vFolders/vFolders Data.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjectSettings/QualitySettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/QualitySettings.asset" afterDir="false" />
+=======
+    <list default="true" id="57143212-af16-4174-a004-adb6449416e3" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Cronoguard_3D/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Cronoguard_3D/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Developers/Coen/SceneCoen.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Developers/Coen/SceneCoen.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Turret/ShootingSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Turret/ShootingSystem.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Turret/TrackingSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Turret/TrackingSystem.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Turret/TurretController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Turret/TurretController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/URPProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/URPProjectSettings.asset" afterDir="false" />
+>>>>>>> Stashed changes
       <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2022.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2022.dwlt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/Search.settings" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Search.settings" afterDir="false" />
     </list>
@@ -93,9 +103,19 @@
       <created>1702976080727</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
+<<<<<<< Updated upstream
       <updated>1702976080727</updated>
       <workItem from="1702976084311" duration="2321000" />
       <workItem from="1703154547585" duration="3491000" />
+=======
+      <updated>1702976663274</updated>
+      <workItem from="1702976665721" duration="2840000" />
+      <workItem from="1703082782656" duration="149000" />
+      <workItem from="1703086561712" duration="5000" />
+      <workItem from="1703086583890" duration="32000" />
+      <workItem from="1703087310400" duration="688000" />
+      <workItem from="1703155810187" duration="35000" />
+>>>>>>> Stashed changes
     </task>
     <servers />
   </component>
