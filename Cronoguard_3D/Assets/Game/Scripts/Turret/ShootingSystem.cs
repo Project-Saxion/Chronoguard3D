@@ -5,6 +5,7 @@ using UnityEngine;
 public class ShootingSystem : MonoBehaviour
 {
     [SerializeField] private Transform shootPoint;
+    [SerializeField] public int attackDamage;
     [SerializeField] private int shootForce;
 
     public void Attack(string _tagToDamage, int attackDamage)
