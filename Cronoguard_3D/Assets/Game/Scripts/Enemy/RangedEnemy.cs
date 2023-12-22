@@ -25,6 +25,14 @@ public class RangedEnemy : MonoBehaviour
 
     /*public void Attack()
     {
+        if (Input.GetMouseButtonDown(0))
+        {
+            shootingSystem.Attack("Player");
+        }
+    }
+
+    public void Attack()
+    {
         GameObject _bullet = ObjectPool.SharedInstance.GetPooledObject();
         if (_bullet != null)
         {
