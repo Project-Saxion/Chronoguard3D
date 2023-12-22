@@ -6,8 +6,10 @@
   <component name="ChangeListManager">
 <<<<<<< Updated upstream
     <list default="true" id="673bce76-43e8-45dd-851c-238457cf881a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.Cronoguard_3D/.idea/projectSettingsUpdater.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Cronoguard_3D/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Cronoguard_3D/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Developers/Nick/SceneNick.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Developers/Nick/SceneNick.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Prefabs/Bullet.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Prefabs/Bullet.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Generic/BulletController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Generic/BulletController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Turret/ShootingSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Turret/ShootingSystem.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/vFolders/vFolders Data.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/vFolders/vFolders Data.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjectSettings/QualitySettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/QualitySettings.asset" afterDir="false" />
@@ -31,6 +33,7 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/30adf90198bc4c4b83910c6fb1877998174000/99/37f7604f/Object.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Enemy/BasicEnemyController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Enemy/MeleeEnemy.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Enemy/RangedEnemy.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Generic/ObjectPool.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
@@ -126,5 +129,24 @@
   <component name="UnityUnitTestConfiguration" currentTestLauncher="Both" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Game/Scripts/Turret/ShootingSystem.cs</url>
+          <line>20</line>
+          <properties documentPath="E:\School\Term2\Project\Chronoguard3D\Cronoguard_3D\Assets\Game\Scripts\Turret\ShootingSystem.cs" initialLine="20" containingFunctionPresentation="Method 'Attack'">
+            <startOffsets>
+              <option value="691" />
+            </startOffsets>
+            <endOffsets>
+              <option value="730" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

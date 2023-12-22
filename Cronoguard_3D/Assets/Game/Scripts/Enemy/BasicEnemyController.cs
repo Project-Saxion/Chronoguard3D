@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine.Events;
 using UnityEngine.AI;
 
@@ -39,6 +40,9 @@ public class BasicEnemyController : MonoBehaviour
         navMeshAgent = GetComponent<NavMeshAgent>();
         
         _targetSize = _mainTargetSize;
+
+        navMeshAgent.speed = movementSpeed;
+        navMeshAgent.destination = mainTarget.transform.position;
     }
 
     private void Update()
@@ -52,7 +56,7 @@ public class BasicEnemyController : MonoBehaviour
         _target = newTarget;
         if (IsFollowing())
         {
-//            _destinationSetter.target = _target;
+            navMeshAgent.destination = _target.transform.position;
         }
     }
 
@@ -65,18 +69,17 @@ public class BasicEnemyController : MonoBehaviour
     {
         if (shouldFollow)
         {
-//            _destinationSetter.target = _target;
+            SetTarget(_target);
         }
         else
         {
-//            _destinationSetter.target = transform;
+            SetTarget(transform);
         }
-        
     }
 
     bool IsFollowing()
     {
-        if (true/*_destinationSetter.target == transform*/)
+        if (navMeshAgent.destination == transform.position)
         {
             return false;
         }
@@ -99,7 +102,7 @@ public class BasicEnemyController : MonoBehaviour
 
     void StopOnAttackRange()
     {
-        if (Vector3.Distance(transform.position, _target.position) + (_targetSize/2) < attackRange)
+        if (Vector3.Distance(transform.position, _target.position) < attackRange)
         {
             SetFollowing(false);
             Attack();
