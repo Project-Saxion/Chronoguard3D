@@ -1,18 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Quaternion = UnityEngine.Quaternion;
+using Vector3 = UnityEngine.Vector3;
 
 public class TrackingSystem : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public bool rotating;
+    
+    public void Rotate(GameObject target, float speed)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Quaternion desiredRotation = Quaternion.LookRotation(target.transform.position - transform.position);
+        if (transform.rotation != desiredRotation)
+        {
+            rotating = true;
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, desiredRotation, speed);
+        }
+        else
+        {
+            rotating = false;
+        }
     }
 }
