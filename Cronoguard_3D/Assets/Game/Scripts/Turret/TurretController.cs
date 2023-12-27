@@ -52,6 +52,10 @@ public class TurretController : MonoBehaviour
                 target = FindNearestTarget();
             }
         }
+        else
+        {
+            target = FindNearestTarget();
+        }
     }
     private IEnumerator AllowToShoot ()
     {
