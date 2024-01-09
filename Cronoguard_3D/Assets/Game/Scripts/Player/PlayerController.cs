@@ -49,7 +49,7 @@ public class PlayerController : MonoBehaviour
     // Either make 3 different Attack items, or have a list that only get's 2/3rd of modifiers...
     public Attack[] attacking;
     public float attackModifier;
-    public String[] tagsToDamage;
+    public String[] tagsToDamage = new[] {"Enemy"};
 
     public ShootingSystem ShootingSystem;
     
@@ -158,7 +158,7 @@ public class PlayerController : MonoBehaviour
         if (shootTimer > shootCooldown)
         {
             shootTimer = 0;
-            ShootingSystem.Attack("Enemy");
+            ShootingSystem.Attack(tagsToDamage);
         }
     }
 
