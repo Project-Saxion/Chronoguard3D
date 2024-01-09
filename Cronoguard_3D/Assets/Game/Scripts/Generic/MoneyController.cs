@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class MoneyController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private int money;
+
+    public int GetMoney()
     {
-        
+        return money;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void AddMoney(int moneyAmount)
     {
-        
+        money += moneyAmount;
+    }
+
+    public void RemoveMoney(int moneyAmount)
+    {
+        money -= moneyAmount;
     }
 }

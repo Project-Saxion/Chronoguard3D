@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
 <<<<<<< HEAD
+<<<<<<< HEAD
     <list default="true" id="57143212-af16-4174-a004-adb6449416e3" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Cronoguard_3D/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Cronoguard_3D/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Developers/Simon/SceneSimon.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Developers/Simon/SceneSimon.unity" afterDir="false" />
@@ -16,13 +17,30 @@
       <change beforePath="$PROJECT_DIR$/ProjectSettings/URPProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/URPProjectSettings.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
 =======
+=======
+<<<<<<< Updated upstream
+>>>>>>> origin/main
     <list default="true" id="673bce76-43e8-45dd-851c-238457cf881a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.Cronoguard_3D/.idea/projectSettingsUpdater.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Cronoguard_3D/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Cronoguard_3D/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Developers/Nick/SceneNick.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Developers/Nick/SceneNick.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Prefabs/Bullet.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Prefabs/Bullet.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Generic/BulletController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Generic/BulletController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Turret/ShootingSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Turret/ShootingSystem.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/vFolders/vFolders Data.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/vFolders/vFolders Data.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjectSettings/QualitySettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/QualitySettings.asset" afterDir="false" />
+<<<<<<< HEAD
 >>>>>>> origin/Nick
+=======
+=======
+    <list default="true" id="57143212-af16-4174-a004-adb6449416e3" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Cronoguard_3D/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Cronoguard_3D/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Developers/Coen/SceneCoen.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Developers/Coen/SceneCoen.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Turret/ShootingSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Turret/ShootingSystem.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Turret/TrackingSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Turret/TrackingSystem.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Turret/TurretController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Turret/TurretController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/URPProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/URPProjectSettings.asset" afterDir="false" />
+>>>>>>> Stashed changes
+>>>>>>> origin/main
       <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2022.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2022.dwlt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/Search.settings" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Search.settings" afterDir="false" />
     </list>
@@ -31,6 +49,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+<<<<<<< HEAD
 <<<<<<< HEAD
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -44,14 +63,20 @@
 }</component>
   <component name="ProjectId" id="2ZkqwFeJsWRFnab3yjbsf7NBHao" />
 =======
+=======
+>>>>>>> origin/main
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/30adf90198bc4c4b83910c6fb1877998174000/99/37f7604f/Object.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Enemy/BasicEnemyController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Enemy/MeleeEnemy.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Enemy/RangedEnemy.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Generic/ObjectPool.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="2ZkpketaL23bhBhaVu7h792Cu0r" />
+<<<<<<< HEAD
 >>>>>>> origin/Nick
+=======
+>>>>>>> origin/main
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -99,12 +124,16 @@
       <option name="EXE_PATH" value="E:\Unity\Engine\2022.3.13f1\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-projectPath E:\School\Term2\Project\Chronoguard3D\Cronoguard_3D -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="E:\School\Term2\Project\Chronoguard3D\Cronoguard_3D" />
+<<<<<<< HEAD
 >>>>>>> origin/Nick
+=======
+>>>>>>> origin/main
       <option name="PASS_PARENT_ENVS" value="1" />
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <method v="2" />
     </configuration>
     <configuration name="Unit Tests (batch mode)" type="RunUnityExe" factoryName="Unity Executable">
+<<<<<<< HEAD
 <<<<<<< HEAD
       <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\2022.3.13f1\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-runTests -batchmode -projectPath C:\Users\Coen\Documents\Chronoguard3D\Cronoguard_3D -testResults Logs/results.xml -testPlatform EditMode -debugCodeOptimization" />
@@ -114,6 +143,11 @@
       <option name="PROGRAM_PARAMETERS" value="-runTests -batchmode -projectPath E:\School\Term2\Project\Chronoguard3D\Cronoguard_3D -testResults Logs/results.xml -testPlatform EditMode -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="E:\School\Term2\Project\Chronoguard3D\Cronoguard_3D" />
 >>>>>>> origin/Nick
+=======
+      <option name="EXE_PATH" value="E:\Unity\Engine\2022.3.13f1\Editor\Unity.exe" />
+      <option name="PROGRAM_PARAMETERS" value="-runTests -batchmode -projectPath E:\School\Term2\Project\Chronoguard3D\Cronoguard_3D -testResults Logs/results.xml -testPlatform EditMode -debugCodeOptimization" />
+      <option name="WORKING_DIRECTORY" value="E:\School\Term2\Project\Chronoguard3D\Cronoguard_3D" />
+>>>>>>> origin/main
       <option name="PASS_PARENT_ENVS" value="1" />
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <method v="2" />
@@ -143,6 +177,7 @@
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
 <<<<<<< HEAD
+<<<<<<< HEAD
       <changelist id="57143212-af16-4174-a004-adb6449416e3" name="Changes" comment="" />
       <created>1702976663274</created>
       <option name="number" value="Default" />
@@ -154,14 +189,29 @@
       <workItem from="1703081044106" duration="6982000" />
       <workItem from="1703156042850" duration="1810000" />
 =======
+=======
+>>>>>>> origin/main
       <changelist id="673bce76-43e8-45dd-851c-238457cf881a" name="Changes" comment="" />
       <created>1702976080727</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
+<<<<<<< Updated upstream
       <updated>1702976080727</updated>
       <workItem from="1702976084311" duration="2321000" />
       <workItem from="1703154547585" duration="3491000" />
+<<<<<<< HEAD
 >>>>>>> origin/Nick
+=======
+=======
+      <updated>1702976663274</updated>
+      <workItem from="1702976665721" duration="2840000" />
+      <workItem from="1703082782656" duration="149000" />
+      <workItem from="1703086561712" duration="5000" />
+      <workItem from="1703086583890" duration="32000" />
+      <workItem from="1703087310400" duration="688000" />
+      <workItem from="1703155810187" duration="35000" />
+>>>>>>> Stashed changes
+>>>>>>> origin/main
     </task>
     <servers />
   </component>
@@ -172,5 +222,24 @@
   <component name="UnityUnitTestConfiguration" currentTestLauncher="Both" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Game/Scripts/Turret/ShootingSystem.cs</url>
+          <line>20</line>
+          <properties documentPath="E:\School\Term2\Project\Chronoguard3D\Cronoguard_3D\Assets\Game\Scripts\Turret\ShootingSystem.cs" initialLine="20" containingFunctionPresentation="Method 'Attack'">
+            <startOffsets>
+              <option value="691" />
+            </startOffsets>
+            <endOffsets>
+              <option value="730" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

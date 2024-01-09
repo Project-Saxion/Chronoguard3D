@@ -17,7 +17,7 @@ namespace Game.Scripts.Enemy
         public int setValueScaling = 50;
         public int startPointAmount = 100;
         public int enemySpawnHeight = 1;
-        
+        public int currentWave = 1;
     
         public void spawnWave(int wave)
         {
@@ -34,6 +34,8 @@ namespace Game.Scripts.Enemy
 
             int pointAmount = (int)Math.Floor((startPointAmount * (scalingPercentage * enemyTier)) + (setValueScaling * wave));
             spawnEnemies(enemyTier, pointAmount);
+
+            currentWave += 1;
         }
         
         // Start is called before the first frame update
@@ -50,7 +52,7 @@ namespace Game.Scripts.Enemy
             } 
             
             enemyScaling = GetComponent<EnemyScaling>();
-            spawnWave(4);
+            spawnWave(currentWave);
         }
         
         private void spawnEnemies(int enemyTier, int pointAmount)

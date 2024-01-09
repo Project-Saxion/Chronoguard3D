@@ -16,12 +16,13 @@ public class BulletController : MonoBehaviour
         StartCoroutine(DestroyAfterTimer(destroyTimer));
     }
     
-    private void OnCollisionEnter2D(Collision2D other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag(tagToDamage))
         {
             HealthController targetHealthController = other.gameObject.GetComponent<HealthController>();
             //targetHealthController.doDamage(damage);
+            gameObject.SetActive(false);
         }
         if (!other.gameObject.CompareTag("Bullet"))
         {

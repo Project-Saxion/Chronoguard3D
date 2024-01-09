@@ -23,7 +23,7 @@ public class RangedEnemy : MonoBehaviour
         shootingSystem = GetComponent<ShootingSystem>();
     }
 
-    private void Update()
+    /*public void Attack()
     {
         if (Input.GetMouseButtonDown(0))
         {
@@ -44,6 +44,6 @@ public class RangedEnemy : MonoBehaviour
         BulletController bulletController = _bullet.GetComponent<BulletController>();
         bulletRB.AddForce(transform.forward * shootForce);
         bulletController.damage = attackDamage;
-    }
+    }*/
 
 }

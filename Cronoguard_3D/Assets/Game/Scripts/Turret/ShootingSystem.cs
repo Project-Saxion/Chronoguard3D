@@ -22,4 +22,13 @@ public class ShootingSystem : MonoBehaviour
         bulletController.tagToDamage = _tagToDamage;
         bulletController.FireBullet(shootForce);
     }
+    public void SetDamage(int amount)
+    {
+        attackDamage = amount;
+    }
+
+    public int GetDamage()
+    {
+        return attackDamage;
+    }
 }
