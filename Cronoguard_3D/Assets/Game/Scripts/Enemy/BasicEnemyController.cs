@@ -69,11 +69,11 @@ public class BasicEnemyController : MonoBehaviour
     {
         if (shouldFollow)
         {
-            SetTarget(_target);
+            navMeshAgent.destination = _target.position;
         }
         else
         {
-            SetTarget(transform);
+            navMeshAgent.destination = transform.position;
         }
     }
 
