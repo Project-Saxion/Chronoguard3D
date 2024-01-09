@@ -8,7 +8,7 @@ public class ShootingSystem : MonoBehaviour
     [SerializeField] public int attackDamage;
     [SerializeField] private int shootForce;
 
-    public void Attack(string _tagToDamage)
+    public void Attack(string[] _tagsToDamage)
     {
         GameObject bullet = ObjectPool.SharedInstance.GetPooledObject();
         if (bullet != null)
@@ -19,7 +19,7 @@ public class ShootingSystem : MonoBehaviour
         }
         BulletController bulletController = bullet.GetComponent<BulletController>();
         bulletController.damage = attackDamage;
-        bulletController.tagToDamage = _tagToDamage;
+        bulletController.tagsToDamage = _tagsToDamage;
         bulletController.FireBullet(shootForce);
     }
     public void SetDamage(int amount)
