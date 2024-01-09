@@ -5,7 +5,7 @@ public class BulletController : MonoBehaviour
 {
     public Rigidbody rb;
     public int damage;
-    public string tagToDamage;
+    public string[] tagsToDamage;
     public int destroyTimer; 
     
 
@@ -18,12 +18,16 @@ public class BulletController : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag(tagToDamage))
+        foreach (string tag in tagsToDamage)
         {
-            HealthController targetHealthController = other.gameObject.GetComponent<HealthController>();
-            //targetHealthController.doDamage(damage);
-            gameObject.SetActive(false);
+            if (other.gameObject.CompareTag(tag))
+            {
+                HealthController targetHealthController = other.gameObject.GetComponent<HealthController>();
+                //targetHealthController.doDamage(damage);
+                gameObject.SetActive(false);
+            }
         }
+
         if (!other.gameObject.CompareTag("Bullet"))
         {
             gameObject.SetActive(false);
