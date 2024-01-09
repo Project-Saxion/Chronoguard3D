@@ -9,8 +9,6 @@ public class TurretController : MonoBehaviour
 
     [SerializeField] private int range = 7;
 
-    [SerializeField] private int attackDamage = 10;
-
     [SerializeField] private int fireRate = 1;
 
     [SerializeField] private float rotationSpeed = 100f;
@@ -46,13 +44,17 @@ public class TurretController : MonoBehaviour
                     _canShoot = false;
                     // Wait till timer is done
                     StartCoroutine(nameof(AllowToShoot));
-                    _shootingSystem.Attack("Enemy", attackDamage);
+                    _shootingSystem.Attack("Enemy");
                 }
             }
             else
             {
                 target = FindNearestTarget();
             }
+        }
+        else
+        {
+            target = FindNearestTarget();
         }
     }
     private IEnumerator AllowToShoot ()
@@ -84,5 +86,22 @@ public class TurretController : MonoBehaviour
     public void FindTargets()
     {
         allTargets = new List<GameObject>(GameObject.FindGameObjectsWithTag("Enemy"));
+    }
+    public void RemoveTargetFromList(GameObject removeAbleTarget)
+    {
+        if (allTargets.Contains(removeAbleTarget))
+        {
+            allTargets.Remove(removeAbleTarget);
+        }
+    }
+    
+    public void SetFireRate(int amount)
+    {
+        fireRate = amount;
+    }
+
+    public int GetFireRate()
+    {
+        return fireRate;
     }
 }
