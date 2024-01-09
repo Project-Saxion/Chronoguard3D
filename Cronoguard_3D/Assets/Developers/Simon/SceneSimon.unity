@@ -1139,7 +1139,7 @@ MonoBehaviour:
   HeavyAttack: {fileID: 690751228}
   enemies:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   attackTime: 2
   attackDuration: 0.3
   attackCooldown: 1
@@ -1155,6 +1155,8 @@ MonoBehaviour:
   - {fileID: 286661572}
   - {fileID: 690751233}
   attackModifier: 1
+  tagsToDamage:
+  - Enemy
   ShootingSystem: {fileID: 1575932933}
   moveSpeed: 5
   acceleration: 10
