@@ -49,6 +49,8 @@ public class PlayerController : MonoBehaviour
     // Either make 3 different Attack items, or have a list that only get's 2/3rd of modifiers...
     public Attack[] attacking;
     public float attackModifier;
+
+    public ShootingSystem ShootingSystem;
     
     [SerializeField] public float moveSpeed;
     [SerializeField] public float acceleration;
@@ -155,10 +157,7 @@ public class PlayerController : MonoBehaviour
         if (shootTimer > shootCooldown)
         {
             shootTimer = 0;
-            GameObject intBullet = Instantiate(bullet, Aim.position, Aim.rotation);
-            intBullet.GetComponent<Rigidbody2D>().AddForce(-Aim.up * fireForce, ForceMode2D.Impulse);
-
-            Destroy(intBullet, 2f);
+            ShootingSystem.Attack("Enemy");
         }
     }
 
