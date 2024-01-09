@@ -18,6 +18,7 @@ public class TurretController : MonoBehaviour
     private ShootingSystem _shootingSystem;
 
     private TrackingSystem _trackingSystem;
+    private string[] _tagsToDamage = new[] { "Enemy" };
 
     private bool _canShoot = true;
 
@@ -44,7 +45,7 @@ public class TurretController : MonoBehaviour
                     _canShoot = false;
                     // Wait till timer is done
                     StartCoroutine(nameof(AllowToShoot));
-                    _shootingSystem.Attack("Enemy");
+                    _shootingSystem.Attack(_tagsToDamage);
                 }
             }
             else
@@ -80,7 +81,6 @@ public class TurretController : MonoBehaviour
             return target;  
         }
         return null;
-
     }
     
     public void FindTargets()
