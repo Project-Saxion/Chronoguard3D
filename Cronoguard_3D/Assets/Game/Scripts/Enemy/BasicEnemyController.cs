@@ -69,11 +69,11 @@ public class BasicEnemyController : MonoBehaviour
     {
         if (shouldFollow)
         {
-            SetTarget(_target);
+            navMeshAgent.destination = _target.position;
         }
         else
         {
-            SetTarget(transform);
+            navMeshAgent.destination = transform.position;
         }
     }
 
@@ -105,6 +105,7 @@ public class BasicEnemyController : MonoBehaviour
         if (Vector3.Distance(transform.position, _target.position) < attackRange)
         {
             SetFollowing(false);
+            RotateToTarget();
             Attack();
         }
         else
@@ -145,5 +146,13 @@ public class BasicEnemyController : MonoBehaviour
     public void DropMoney(int amount)
     {
 //        MoneyManager.Instance.addMoney(amount);
+    }
+
+    void RotateToTarget()
+    {
+        Vector3 lookPos = _target.position - transform.position;
+        lookPos.y = 0;
+        Quaternion rotation = Quaternion.LookRotation(lookPos);
+        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 10);
     }
 }
