@@ -105,7 +105,7 @@ public class BasicEnemyController : MonoBehaviour
         if (Vector3.Distance(transform.position, _target.position) < attackRange)
         {
             SetFollowing(false);
-            RotateToTarget();
+            //RotateToTarget();
             Attack();
         }
         else
@@ -150,9 +150,9 @@ public class BasicEnemyController : MonoBehaviour
 
     void RotateToTarget()
     {
-        Vector3 lookPos = _target.position - transform.position;
+        /*Vector3 lookPos = _target.position - transform.position;
         lookPos.y = 0;
         Quaternion rotation = Quaternion.LookRotation(lookPos);
-        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 10);
+        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 10);*/
     }
 }
