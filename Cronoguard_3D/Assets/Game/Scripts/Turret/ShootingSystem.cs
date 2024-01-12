@@ -16,6 +16,7 @@ public class ShootingSystem : MonoBehaviour
             bullet.transform.position = shootPoint.position;
             bullet.transform.rotation = shootPoint.rotation;
             bullet.SetActive(true);
+            Debug.Log(bullet);
         }
         BulletController bulletController = bullet.GetComponent<BulletController>();
         bulletController.damage = attackDamage;
