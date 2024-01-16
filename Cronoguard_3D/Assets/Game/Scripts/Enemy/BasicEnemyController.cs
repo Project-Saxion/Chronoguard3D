@@ -43,6 +43,8 @@ public class BasicEnemyController : MonoBehaviour
 
         navMeshAgent.speed = movementSpeed;
         navMeshAgent.destination = mainTarget.transform.position;
+        _target = mainTarget.transform;
+
     }
 
     private void Update()
@@ -88,15 +90,20 @@ public class BasicEnemyController : MonoBehaviour
 
     void ChangeTargetOnRange()
     {
-        if (Vector3.Distance(transform.position, player.transform.position) < targetRange && _target != player && player.gameObject.activeInHierarchy == true)
+        
+        if (Vector3.Distance(transform.position, player.transform.position) < targetRange && _target.gameObject != player && player.gameObject.activeInHierarchy == true)
         {
             SetTarget(player.transform);
             _targetSize = _playerSize;
         }
-        else if (_target != mainTarget)
+        else
         {
-            SetTarget(mainTarget.transform);
-            _targetSize = _mainTargetSize;
+            Debug.Log(_target.gameObject == mainTarget);
+            if (_target.gameObject != mainTarget)
+            {
+                SetTarget(mainTarget.transform);
+                _targetSize = _mainTargetSize;
+            }
         }
     }
 
@@ -105,11 +112,13 @@ public class BasicEnemyController : MonoBehaviour
         if (Vector3.Distance(transform.position, _target.position) < attackRange)
         {
             SetFollowing(false);
+            Debug.Log("1");
             RotateToTarget();
             Attack();
         }
-        else
+        else if (!IsFollowing())
         {
+            Debug.Log("2");
             SetFollowing(true);
         }
     }
