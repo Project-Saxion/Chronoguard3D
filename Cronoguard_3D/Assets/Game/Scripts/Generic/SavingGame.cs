@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using Game.Scripts.Generic;
@@ -10,6 +11,8 @@ public class SavingGame : MonoBehaviour
     //     DeleteGame("testFile");
     //     SaveGame("testFile");
     // }
+
+    public string currentSave;
 
     public void SaveGame(string name)
     {
