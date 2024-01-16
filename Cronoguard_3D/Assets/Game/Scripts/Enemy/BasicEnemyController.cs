@@ -43,6 +43,8 @@ public class BasicEnemyController : MonoBehaviour
 
         navMeshAgent.speed = movementSpeed;
         navMeshAgent.destination = mainTarget.transform.position;
+        _target = mainTarget.transform;
+
     }
 
     private void Update()
@@ -69,11 +71,11 @@ public class BasicEnemyController : MonoBehaviour
     {
         if (shouldFollow)
         {
-            SetTarget(_target);
+            navMeshAgent.destination = _target.position;
         }
         else
         {
-            SetTarget(transform);
+            navMeshAgent.destination = transform.position;
         }
     }
 
@@ -88,15 +90,19 @@ public class BasicEnemyController : MonoBehaviour
 
     void ChangeTargetOnRange()
     {
-        if (Vector3.Distance(transform.position, player.transform.position) < targetRange && _target != player && player.gameObject.activeInHierarchy == true)
+        
+        if (Vector3.Distance(transform.position, player.transform.position) < targetRange /*&& _target.gameObject != player*/ && player.gameObject.activeInHierarchy)
         {
             SetTarget(player.transform);
             _targetSize = _playerSize;
         }
-        else if (_target != mainTarget)
+        else
         {
-            SetTarget(mainTarget.transform);
-            _targetSize = _mainTargetSize;
+            if (_target.gameObject != mainTarget)
+            {
+                SetTarget(mainTarget.transform);
+                _targetSize = _mainTargetSize;
+            }
         }
     }
 
@@ -105,10 +111,13 @@ public class BasicEnemyController : MonoBehaviour
         if (Vector3.Distance(transform.position, _target.position) < attackRange)
         {
             SetFollowing(false);
+            Debug.Log("1");
+            RotateToTarget();
             Attack();
         }
-        else
+        else if (!IsFollowing())
         {
+            Debug.Log("2");
             SetFollowing(true);
         }
     }
@@ -145,5 +154,13 @@ public class BasicEnemyController : MonoBehaviour
     public void DropMoney(int amount)
     {
 //        MoneyManager.Instance.addMoney(amount);
+    }
+
+    void RotateToTarget()
+    {
+        Vector3 lookPos = _target.position - transform.position;
+        lookPos.y = 0;
+        Quaternion rotation = Quaternion.LookRotation(lookPos);
+        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 10);
     }
 }
