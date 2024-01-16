@@ -29,8 +29,6 @@ public class UpgradeController : MonoBehaviour
         1.25,
         // Turret Damage multiplier
         1.25,
-        // Turret Firerate multiplier
-        1.25,
         // Attack multiplier
         1.25,
         // HP multiplier
@@ -48,23 +46,23 @@ public class UpgradeController : MonoBehaviour
         1, // Attack lvl
         1, // HP lvl
     };
-    private List<(int, int)> turretData = new List<(int, int)>
+    private List<(float, int)> turretData = new List<(float, int)>
     {
-        (1, 15),
-        (4, 10),
-        (5, 15),
-        (10, 10)
+        (1, 6),
+        (0.8f, 6),
+        (0.8f, 10),
+        (0.5f, 10)
     };
 
     [SerializeField] private List<float> startValues = new List<float>()
     {
     };
-
-    [SerializeField] private GameObject TurretPrefab;
-    [SerializeField] private GameObject baseObject;
+    
     private MoneyController _moneyController;
     private HealthController _playerHealthController;
-    private Attack _playerAttackController;
+    private PlayerController _playerAttackController;
+    public float playerStartAttack;
+    public int playerStartHealth;
     public int playerMaxHealth;
     
     private HealthController _baseHealthController;
@@ -85,16 +83,23 @@ public class UpgradeController : MonoBehaviour
         _moneyController = GetComponent<MoneyController>();
         
         player = GameObject.FindGameObjectWithTag("Player");
-        _playerAttackController = player.GetComponent<Attack>();
+        _playerAttackController = player.GetComponent<PlayerController>();
         _playerHealthController = player.GetComponent<HealthController>();
+        playerStartHealth = _playerHealthController.GetMaxHealth();
         playerMaxHealth = _playerHealthController.GetMaxHealth();
+        playerStartAttack =  _playerAttackController.attackModifier;
 
         tower = GameObject.FindGameObjectWithTag("Base");
         _baseHealthController = tower.GetComponent<HealthController>();
         baseStartHealth = _baseHealthController.GetMaxHealth();
 
         turretList = GameObject.FindGameObjectsWithTag("Turret");
-        UpgradeTurret(2);
+        for (int i = 0; i < turretList.Length; i++)
+        {
+            GameObject turret = turretList[i];
+            turret.SetActive(false);
+        }
+        UpgradeHP(3);
     }
 
     public void UpgradeBaseHp(int level)
@@ -114,64 +119,65 @@ public class UpgradeController : MonoBehaviour
     {
         if (costs[1] <= _moneyController.GetMoney())
         {
-            if (level < 4)
+            if (level - 1 < 4)
             {
                 for (int i = 0; i < level; i++)
                 {
                     turretList[i].SetActive(true);
                 }
                 _moneyController.RemoveMoney(costs[1]);
-                levels[0] = level;
+                levels[1] = level;
             }
         }
     } 
-    public void UpgradeTurretDamage(int turretIndex)
+    public void UpgradeTurretDamage(int turretIndex, int level)
     {
         if (costs[2] <= _moneyController.GetMoney())
         {
             GameObject turret = turretList[turretIndex];
-            turret.GetComponent<ShootingSystem>().SetDamage(Mathf.RoundToInt((float)(turret.GetComponent<ShootingSystem>().GetDamage()*multipliers[1])));
-            _moneyController.RemoveMoney(costs[1]);
-        }
-    }
-
-    public void UpgradeTurretFirerate(int turretIndex)
-    {
-        if (costs[3] <= _moneyController.GetMoney())
-        {
-            GameObject turret = turretList[turretIndex];
-            turret.GetComponent<TurretController>().SetFireRate(Mathf.RoundToInt((float)(turret.GetComponent<TurretController>().GetFireRate()*multipliers[2])));    
+            turret.GetComponent<TurretController>().SetFireRate(turretData[level - 1].Item1);
+            turret.GetComponent<ShootingSystem>().SetDamage(turretData[level - 1].Item2);
             _moneyController.RemoveMoney(costs[2]);
+            levels[2 + turretIndex] = level;
         }
     }
     
     public void UpgradeAttack(int level)
     {
-        if (costs[4] <= _moneyController.GetMoney())
+        if (costs[3] <= _moneyController.GetMoney())
         {
-            _playerAttackController.SetModifier((float) (_playerAttackController.GetModifier()*1.25));
+            float newAttack = (float)(playerStartAttack * Math.Pow(multipliers[2], level));
+            _playerAttackController.attackModifier = newAttack;
+            _moneyController.RemoveMoney(costs[3]);
+            levels[6] = level;
         }
     }
 
-    public void UpgradeHP()
+    public void UpgradeHP(int level)
     {
-        if (costs[5] <= _moneyController.GetMoney())
+        if (costs[4] <= _moneyController.GetMoney())
         {
-            _playerHealthController.SetHealth(Mathf.CeilToInt((float)(playerMaxHealth * multipliers[4])));
-            _playerHealthController.SetMaxHealth(Mathf.CeilToInt((float)(playerMaxHealth * multipliers[4]))); 
-            playerMaxHealth = Mathf.CeilToInt((float)(playerMaxHealth * multipliers[4])); 
+            int newHealth = Mathf.CeilToInt((float)(playerStartHealth * Math.Pow(multipliers[3], level)));
+            _playerHealthController.SetHealth(newHealth);
+            _playerHealthController.SetMaxHealth(newHealth); 
+            playerMaxHealth = Mathf.CeilToInt(newHealth); 
             _moneyController.RemoveMoney(costs[4]);
         }
     }
 
     public void HealPotion()
     {
-        if (costs[6] <= _moneyController.GetMoney())
+        if (costs[5] <= _moneyController.GetMoney())
         {
             _playerHealthController.Heal(healPotionAmount);
             _moneyController.RemoveMoney(costs[5]);
         }
         
+    }
+
+    public GameObject[] getTurrets()
+    {
+        return turretList;
     }
 }
 

@@ -9,7 +9,7 @@ public class TurretController : MonoBehaviour
 
     [SerializeField] private int range = 7;
 
-    [SerializeField] private int fireRate = 1;
+    [SerializeField] private float fireRate = 1;
 
     [SerializeField] private float rotationSpeed = 100f;
 
@@ -95,12 +95,12 @@ public class TurretController : MonoBehaviour
         }
     }
     
-    public void SetFireRate(int amount)
+    public void SetFireRate(float amount)
     {
         fireRate = amount;
     }
 
-    public int GetFireRate()
+    public float GetFireRate()
     {
         return fireRate;
     }
