@@ -91,14 +91,13 @@ public class BasicEnemyController : MonoBehaviour
     void ChangeTargetOnRange()
     {
         
-        if (Vector3.Distance(transform.position, player.transform.position) < targetRange && _target.gameObject != player && player.gameObject.activeInHierarchy == true)
+        if (Vector3.Distance(transform.position, player.transform.position) < targetRange /*&& _target.gameObject != player*/ && player.gameObject.activeInHierarchy)
         {
             SetTarget(player.transform);
             _targetSize = _playerSize;
         }
         else
         {
-            Debug.Log(_target.gameObject == mainTarget);
             if (_target.gameObject != mainTarget)
             {
                 SetTarget(mainTarget.transform);
