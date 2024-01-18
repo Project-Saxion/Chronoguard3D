@@ -146,10 +146,7 @@ public class PlayerController : MonoBehaviour
             
             attacking[0].SetModifier(attackModifier);
             attacking[1].SetModifier(attackModifier);
-            // attacking[2].SetModifier(attackModifier);
-            attackModifier++;
             
-            Debug.Log("Updated melee modifier: " + attackModifier);
             if (!isAttacking)
             {
                 Melee.SetActive(true);
