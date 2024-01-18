@@ -161,6 +161,7 @@ public class UpgradeController : MonoBehaviour
             _playerHealthController.SetMaxHealth(newHealth); 
             playerMaxHealth = Mathf.CeilToInt(newHealth); 
             _moneyController.RemoveMoney(costs[4]);
+            levels[7] = level;
         }
     }
 
@@ -177,6 +178,11 @@ public class UpgradeController : MonoBehaviour
     public GameObject[] getTurrets()
     {
         return turretList;
+    }
+
+    public List<int> getLevels()
+    {
+        return levels;
     }
 }
 
