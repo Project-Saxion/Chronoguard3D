@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
@@ -21,6 +22,9 @@ public class PlayerController : MonoBehaviour
     private InputAction fire;
     private InputAction heavyAttack;
     
+    // Unity Events
+    public UnityEvent basicAttackEvent;
+    public UnityEvent heavyAttackEvent;
     
     public GameObject Melee;
     public GameObject HeavyAttack;
@@ -137,14 +141,12 @@ public class PlayerController : MonoBehaviour
     {
         if (attackTime > attackCooldown)
         {
+            basicAttackEvent.Invoke();
             attackTime = 0;
             
             attacking[0].SetModifier(attackModifier);
             attacking[1].SetModifier(attackModifier);
-            // attacking[2].SetModifier(attackModifier);
-            attackModifier++;
             
-            Debug.Log("Updated melee modifier: " + attackModifier);
             if (!isAttacking)
             {
                 Melee.SetActive(true);
@@ -166,6 +168,7 @@ public class PlayerController : MonoBehaviour
     {
         if (heavyAttackTime > heavyAttackCooldown)
         {
+            heavyAttackEvent.Invoke();
             heavyAttackTime = 0;
             if (!heavyIsAttacking)
             {
@@ -192,6 +195,15 @@ public class PlayerController : MonoBehaviour
             heavyIsAttacking = false;
             HeavyAttack.SetActive(false);
         }
+    }
+
+    public float[] getCooldown()
+    {
+        return new[]
+        {
+            attackCooldown,
+            heavyAttackCooldown
+        };
     }
 }
 
