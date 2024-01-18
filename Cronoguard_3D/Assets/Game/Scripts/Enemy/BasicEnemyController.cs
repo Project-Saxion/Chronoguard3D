@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Game.Scripts.Enemy;
 using UnityEngine;
 using Unity.VisualScripting;
 using UnityEditor;
@@ -13,6 +14,7 @@ public class BasicEnemyController : MonoBehaviour
 
     public GameObject player;
     public GameObject mainTarget;
+    public EnemySpawning enemySpawning;
     
     private NavMeshAgent navMeshAgent;
     
@@ -26,7 +28,7 @@ public class BasicEnemyController : MonoBehaviour
 
     public UnityEvent onAttack; 
     private float _attackTime;
-
+    
     private float _mainTargetSize;
     private float _playerSize;
     private float _targetSize;
@@ -90,8 +92,7 @@ public class BasicEnemyController : MonoBehaviour
 
     void ChangeTargetOnRange()
     {
-        
-        if (Vector3.Distance(transform.position, player.transform.position) < targetRange /*&& _target.gameObject != player*/ && player.gameObject.activeInHierarchy)
+        if (Vector3.Distance(transform.position, player.transform.position) < targetRange && player.gameObject.activeInHierarchy)
         {
             SetTarget(player.transform);
             _targetSize = _playerSize;
@@ -111,13 +112,11 @@ public class BasicEnemyController : MonoBehaviour
         if (Vector3.Distance(transform.position, _target.position) < attackRange)
         {
             SetFollowing(false);
-            Debug.Log("1");
             RotateToTarget();
             Attack();
         }
         else if (!IsFollowing())
         {
-            Debug.Log("2");
             SetFollowing(true);
         }
     }
@@ -137,9 +136,10 @@ public class BasicEnemyController : MonoBehaviour
         foreach (GameObject turret in turrets)
         {
             TurretController turretController = turret.GetComponent<TurretController>();
-//            turretController.removeTargetFromList(gameObject);
+            turretController.RemoveTargetFromList(gameObject);
         }
 
+        enemySpawning.DestroyEnemy();
         Destroy(gameObject);
     }
     
