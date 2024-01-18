@@ -99,7 +99,6 @@ public class UpgradeController : MonoBehaviour
             GameObject turret = turretList[i];
             turret.SetActive(false);
         }
-        UpgradeHP(3);
     }
 
     public void UpgradeBaseHp(int level)
