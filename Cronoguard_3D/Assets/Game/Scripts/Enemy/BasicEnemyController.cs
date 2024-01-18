@@ -14,9 +14,11 @@ public class BasicEnemyController : MonoBehaviour
 
     public GameObject player;
     public GameObject mainTarget;
+    public Animator[] characterAnimators;
     public EnemySpawning enemySpawning;
     
     private NavMeshAgent navMeshAgent;
+    private Rigidbody rb;
     
     //values
     private Transform _target;
@@ -40,6 +42,7 @@ public class BasicEnemyController : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         mainTarget = GameObject.FindGameObjectWithTag("Base");
         navMeshAgent = GetComponent<NavMeshAgent>();
+        rb = rb.GetComponent<Rigidbody>();
         
         _targetSize = _mainTargetSize;
 
@@ -53,6 +56,15 @@ public class BasicEnemyController : MonoBehaviour
     {
         ChangeTargetOnRange();
         StopOnAttackRange();
+        UpdateAnimations();
+    }
+
+    void UpdateAnimations()
+    {
+        foreach (Animator animator in characterAnimators)
+        {
+            animator.SetFloat("Velocity", rb.velocity.magnitude);
+        }
     }
 
     public void SetTarget(Transform newTarget)
@@ -138,6 +150,8 @@ public class BasicEnemyController : MonoBehaviour
             TurretController turretController = turret.GetComponent<TurretController>();
             turretController.RemoveTargetFromList(gameObject);
         }
+        
+        
 
         enemySpawning.DestroyEnemy();
         Destroy(gameObject);
