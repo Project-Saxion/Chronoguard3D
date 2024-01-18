@@ -16,16 +16,24 @@ namespace Game.Scripts.Enemy
         public float scalingPercentage = 1.2f;
         public int setValueScaling = 50;
         public int startPointAmount = 100;
-        public int enemySpawnHeight = 1;
+        public int enemySpawnHeight = 10;
         public int currentWave = 1;
-    
+        private int enemiesLeft = 0;
+        
+        private void Update()
+        {
+            if (enemiesLeft == 0)
+            {
+                spawnWave(currentWave);
+            }
+        }
+        
         public void spawnWave(int wave)
         {
             int enemyTier;
             if (wave < 24)
             {
                 enemyTier = Mathf.FloorToInt(wave / 8) + 1;
-                Debug.Log(enemyTier);
             }
             else
             {
@@ -33,21 +41,29 @@ namespace Game.Scripts.Enemy
             }
 
             int pointAmount = (int)Math.Floor((startPointAmount * (scalingPercentage * enemyTier)) + (setValueScaling * wave));
+            Debug.Log(pointAmount);
             spawnEnemies(enemyTier, pointAmount);
 
             currentWave += 1;
         }
-        
+
+        public void DestroyEnemy()
+        {
+            enemiesLeft--;
+        }
+
         // Start is called before the first frame update
         void Start()
         {
             spawnLocations = new Vector3[numberOfPoints];
             float angleStep = 360.0f / numberOfPoints;
+            GameObject mainTarget = GameObject.FindGameObjectWithTag("Base");
+            Vector3 locationMainTarget = mainTarget.transform.position;
             for (int i = 0; i < numberOfPoints; i++)
             {
                 float angleInRadians = Mathf.Deg2Rad * (angleStep * i);
-                float x = Mathf.Cos(angleInRadians) * radius;
-                float z = Mathf.Sin(angleInRadians) * radius;
+                float x = (Mathf.Cos(angleInRadians) * radius) + locationMainTarget.x;
+                float z = (Mathf.Sin(angleInRadians) * radius) + locationMainTarget.z;
                 spawnLocations[i] = new Vector3(x, enemySpawnHeight, z);
             } 
             
@@ -67,6 +83,7 @@ namespace Game.Scripts.Enemy
                     int temp = UnityEngine.Random.Range(0, numberOfPoints);
                     Vector3 spawnLocation = spawnLocations[temp];
                     GameObject spawnEnemy = Instantiate(enemies[i], spawnLocation, parentObject.transform.rotation, parentObject.transform);
+                    enemiesLeft++;
                     // spawnEnemy.GetComponent<HealthController>().setHealth(healthEnemy);
                 }
             }
