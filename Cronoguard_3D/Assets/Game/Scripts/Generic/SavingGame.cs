@@ -12,6 +12,11 @@ public class SavingGame : MonoBehaviour
     //     SaveGame("testFile");
     // }
 
+    public List<string> getSaveGames()
+    {
+        return new List<string>();
+    }
+
     public string currentSave;
 
     public void SaveGame(string name)
