@@ -96,6 +96,19 @@ public class UpgradeController : MonoBehaviour
         }
     }
 
+    public void UpgradeBaseHp()
+    {
+        if (costs[0] <= _moneyController.GetMoney())
+        {
+            int newHealth = Mathf.CeilToInt((float)(baseStartHealth * Math.Pow(multipliers[0], levels[0] + 1)));
+            _baseHealthController.SetHealth(newHealth);
+            _baseHealthController.SetMaxHealth(newHealth); 
+            
+            _moneyController.RemoveMoney(costs[0]);
+            levels[0]++;
+        }
+    }
+
     public void UpgradeBaseHp(int level)
     {
         if (costs[0] <= _moneyController.GetMoney())
@@ -153,7 +166,7 @@ public class UpgradeController : MonoBehaviour
             float newAttack = (float)(playerStartAttack * Math.Pow(multipliers[2], level));
             _playerAttackController.attackModifier = newAttack;
             _moneyController.RemoveMoney(costs[3]);
-            levels[6] = level;
+            levels[5] = level;
         }
     }
 
@@ -166,7 +179,7 @@ public class UpgradeController : MonoBehaviour
             _playerHealthController.SetMaxHealth(newHealth); 
             playerMaxHealth = Mathf.CeilToInt(newHealth); 
             _moneyController.RemoveMoney(costs[4]);
-            levels[7] = level;
+            levels[6] = level;
         }
     }
 
