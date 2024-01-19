@@ -98,15 +98,7 @@ public class UpgradeController : MonoBehaviour
 
     public void UpgradeBaseHp()
     {
-        if (costs[0] <= _moneyController.GetMoney())
-        {
-            int newHealth = Mathf.CeilToInt((float)(baseStartHealth * Math.Pow(multipliers[0], levels[0] + 1)));
-            _baseHealthController.SetHealth(newHealth);
-            _baseHealthController.SetMaxHealth(newHealth); 
-            
-            _moneyController.RemoveMoney(costs[0]);
-            levels[0]++;
-        }
+        UpgradeBaseHp(levels[0] + 1);
     }
 
     public void UpgradeBaseHp(int level)
@@ -114,7 +106,6 @@ public class UpgradeController : MonoBehaviour
         if (costs[0] <= _moneyController.GetMoney())
         {
             int newHealth = Mathf.CeilToInt((float)(baseStartHealth * Math.Pow(multipliers[0], level)));
-            _baseHealthController.SetHealth(newHealth);
             _baseHealthController.SetMaxHealth(newHealth); 
             
             _moneyController.RemoveMoney(costs[0]);
@@ -122,21 +113,11 @@ public class UpgradeController : MonoBehaviour
         }
     }
 
-    // public void UpgradeTurret(int level)
-    // {
-    //     if (costs[1] <= _moneyController.GetMoney())
-    //     {
-    //         if (level - 1 < 4)
-    //         {
-    //             for (int i = 0; i < level; i++)
-    //             {
-    //                 turretList[i].SetActive(true);
-    //             }
-    //             _moneyController.RemoveMoney(costs[1]);
-    //             levels[1] = level;
-    //         }
-    //     }
-    // } 
+    public void UpgradeTurret(int turretIndex)
+    {
+        UpgradeTurret(turretIndex, levels[1 + turretIndex] + 1);
+    }
+    
     public void UpgradeTurret(int turretIndex, int level)
     {
         if (level == 1)
@@ -158,6 +139,11 @@ public class UpgradeController : MonoBehaviour
             }
         }
     }
+
+    public void UpgradeAttack()
+    {
+        UpgradeAttack(levels[5] + 1);
+    }
     
     public void UpgradeAttack(int level)
     {
@@ -170,12 +156,16 @@ public class UpgradeController : MonoBehaviour
         }
     }
 
+    public void UpgradeHp()
+    {
+        UpgradeHp(levels[6] + 1);
+    }
+
     public void UpgradeHp(int level)
     {
         if (costs[4] <= _moneyController.GetMoney())
         {
             int newHealth = Mathf.CeilToInt((float)(playerStartHealth * Math.Pow(multipliers[3], level)));
-            _playerHealthController.SetHealth(newHealth);
             _playerHealthController.SetMaxHealth(newHealth); 
             playerMaxHealth = Mathf.CeilToInt(newHealth); 
             _moneyController.RemoveMoney(costs[4]);
