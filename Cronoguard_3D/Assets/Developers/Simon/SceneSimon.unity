@@ -937,6 +937,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 95439086998023792, guid: 00df519327294ce4da5a577098c3ed4f,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 4a1f5d88f8701c645a7fc91eac0f6de1, type: 2}
+    - target: {fileID: 95439086998023792, guid: 00df519327294ce4da5a577098c3ed4f,
+        type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1112,6 +1122,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 1575932930}
   movementVel: {x: 0, y: 0, z: 0}
+  basicAttackEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  heavyAttackEvent:
+    m_PersistentCalls:
+      m_Calls: []
   Melee: {fileID: 286661567}
   HeavyAttack: {fileID: 690751228}
   enemies:
@@ -1139,6 +1155,7 @@ MonoBehaviour:
   acceleration: 10
   decceleration: 10
   velPower: 1
+  animator: {fileID: 0}
 --- !u!54 &1575932930
 Rigidbody:
   m_ObjectHideFlags: 0

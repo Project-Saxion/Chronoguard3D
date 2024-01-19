@@ -61,6 +61,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public float acceleration;
     [SerializeField] public float decceleration;
     [SerializeField] public float velPower;
+    
+    private bool isFowarward = false;
+    private bool isBackward = false;
+    private bool isLeftward = false;
+    private bool isRightward = false;
+    public Animator animator; 
 
     private void Awake()
     {
@@ -87,7 +93,7 @@ public class PlayerController : MonoBehaviour
         attackModifier = attacking[0].GetModifier();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         MovePlayer();
         
@@ -98,6 +104,9 @@ public class PlayerController : MonoBehaviour
         
         CheckMeleeTimer();
         CheckHeavyAttackTimer();
+
+        AnimateRun(rb.velocity);
+        Debug.Log(rb.velocity);
     }
 
     private void OnDisable()
@@ -136,6 +145,15 @@ public class PlayerController : MonoBehaviour
 
         rb.AddForce(movementVel);
     }
+
+    void AnimateRun(Vector3 desiredDirection)
+    {
+        isFowarward = (desiredDirection.x > 0.1f || desiredDirection.x < -0.1f) ||
+                    (desiredDirection.z > 0.1f || desiredDirection.z < -0.1f)
+            ? true
+            : false;
+        animator.SetBool("isRunning", isFowarward);
+    }
     
     private void Attack(InputAction.CallbackContext context) 
     {
@@ -151,6 +169,7 @@ public class PlayerController : MonoBehaviour
             {
                 Melee.SetActive(true);
                 isAttacking = true;
+                animator.SetTrigger("isAttacking");
             }
         }
     }
