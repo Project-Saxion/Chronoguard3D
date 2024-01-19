@@ -7,12 +7,6 @@ using UnityEngine;
 
 public class SavingGame : MonoBehaviour
 {
-    // private void Start()
-    // {
-    //     DeleteGame("testFile");
-    //     SaveGame("testFile");
-    // }
-
     public List<string> GetSaveGames()
     {
         return Directory.GetFiles(Application.persistentDataPath)
@@ -79,15 +73,17 @@ public class SavingGame : MonoBehaviour
 
             moneyController.AddMoney(int.MaxValue);
             upgradeController.UpgradeBaseHp(save.levels[0]);
-            upgradeController.UpgradeTurret(0, save.levels[2]);
-            upgradeController.UpgradeTurret(1, save.levels[3]);
-            upgradeController.UpgradeTurret(2, save.levels[4]);
-            upgradeController.UpgradeTurret(3, save.levels[5]);
-            upgradeController.UpgradeAttack(save.levels[6]);
-            upgradeController.UpgradeHp(save.levels[7]);
+            upgradeController.UpgradeTurret(0, save.levels[1]);
+            upgradeController.UpgradeTurret(1, save.levels[2]);
+            upgradeController.UpgradeTurret(2, save.levels[3]);
+            upgradeController.UpgradeTurret(3, save.levels[4]);
+            upgradeController.UpgradeAttack(save.levels[5]);
+            upgradeController.UpgradeHp(save.levels[6]);
             moneyController.RemoveMoney(moneyController.GetMoney() - save.money);
             healthControllerPlayer.SetHealth(save.healthBase);
             healthControllerBase.SetHealth(save.healthPlayer);
+            
+            Debug.Log(save.levels[0]);
         }
         else
         {
@@ -95,6 +91,16 @@ public class SavingGame : MonoBehaviour
         }
     }
 
+    // [SerializeField] private List<int> levels = new List<int>()
+    // {
+    //     0, // Base lvl
+    //     0, // Turret t1
+    //     0, // Turret t2
+    //     0, // Turret t3
+    //     0, // Turret t4
+    //     0, // Player Attack lvl
+    //     0, // Player HP lvl
+    // }; 
     public void DeleteGame(string name)
     {
         if (File.Exists(Application.persistentDataPath + "/" + name + ".save"))
