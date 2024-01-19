@@ -55,6 +55,23 @@ public class SavingGame : MonoBehaviour
         Debug.Log("Game Saved");
     }
 
+    public void printValues()
+    {
+        UpgradeController upgradeController = GetComponent<UpgradeController>();
+        MoneyController moneyController = GetComponent<MoneyController>();
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        GameObject tower = GameObject.FindGameObjectWithTag("Base");
+        HealthController healthControllerPlayer = player.GetComponent<HealthController>();
+        HealthController healthControllerBase = tower.GetComponent<HealthController>();
+        foreach (var VARIABLE in upgradeController.getLevels())
+        {
+            Debug.Log(VARIABLE);
+        }
+        Debug.Log(moneyController.GetMoney());
+        Debug.Log(healthControllerPlayer.GetHealth());
+        Debug.Log(healthControllerBase.GetHealth());
+    }
+
     public void LoadGame(string name)
     {
         if (File.Exists(Application.persistentDataPath + "/" + name + ".save"))
@@ -71,7 +88,7 @@ public class SavingGame : MonoBehaviour
             HealthController healthControllerPlayer = player.GetComponent<HealthController>();
             HealthController healthControllerBase = tower.GetComponent<HealthController>();
 
-            moneyController.AddMoney(int.MaxValue);
+            moneyController.AddMoney(1000000);
             upgradeController.UpgradeBaseHp(save.levels[0]);
             upgradeController.UpgradeTurret(0, save.levels[1]);
             upgradeController.UpgradeTurret(1, save.levels[2]);
@@ -83,24 +100,14 @@ public class SavingGame : MonoBehaviour
             healthControllerPlayer.SetHealth(save.healthBase);
             healthControllerBase.SetHealth(save.healthPlayer);
             
-            Debug.Log(save.levels[0]);
+            Debug.Log("loaded value: " + save.levels[0]);
         }
         else
         {
             Debug.Log("No game saved!");
         }
     }
-
-    // [SerializeField] private List<int> levels = new List<int>()
-    // {
-    //     0, // Base lvl
-    //     0, // Turret t1
-    //     0, // Turret t2
-    //     0, // Turret t3
-    //     0, // Turret t4
-    //     0, // Player Attack lvl
-    //     0, // Player HP lvl
-    // }; 
+    
     public void DeleteGame(string name)
     {
         if (File.Exists(Application.persistentDataPath + "/" + name + ".save"))
