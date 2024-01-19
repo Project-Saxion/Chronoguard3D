@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using Game.Scripts.Generic;
 using UnityEngine;
@@ -14,7 +15,10 @@ public class SavingGame : MonoBehaviour
 
     public List<string> getSaveGames()
     {
-        return new List<string>();
+
+        return Directory.GetFiles(Application.persistentDataPath)
+            .Select(item => item.Substring(0, item.Length - 5))
+            .ToList();
     }
 
     public string currentSave;
