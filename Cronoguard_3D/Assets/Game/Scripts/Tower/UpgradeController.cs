@@ -11,9 +11,9 @@ public class UpgradeController : MonoBehaviour
     {
         // Base cost
         50,
-        // Turret Amount cost
+        // Turret First Upgrade cost
         50,
-        // Turret damage cost
+        // Turret DMG cost
         50,
         // Attack cost
         50,
@@ -37,25 +37,20 @@ public class UpgradeController : MonoBehaviour
 
     [SerializeField] private List<int> levels = new List<int>()
     {
-        1, // Base lvl
-        1, // Turret lvl
-        1, // Turret t1
-        1, // Turret t2
-        1, // Turret t3
-        1, // Turret t4
-        1, // Attack lvl
-        1, // HP lvl
-    };
+        0, // Base lvl
+        0, // Turret t1
+        0, // Turret t2
+        0, // Turret t3
+        0, // Turret t4
+        0, // Player Attack lvl
+        0, // Player HP lvl
+    }; 
     private List<(float, int)> turretData = new List<(float, int)>
     {
         (1, 6),
         (0.8f, 6),
         (0.8f, 10),
         (0.5f, 10)
-    };
-
-    [SerializeField] private List<float> startValues = new List<float>()
-    {
     };
     
     private MoneyController _moneyController;
@@ -114,30 +109,40 @@ public class UpgradeController : MonoBehaviour
         }
     }
 
-    public void UpgradeTurret(int level)
+    // public void UpgradeTurret(int level)
+    // {
+    //     if (costs[1] <= _moneyController.GetMoney())
+    //     {
+    //         if (level - 1 < 4)
+    //         {
+    //             for (int i = 0; i < level; i++)
+    //             {
+    //                 turretList[i].SetActive(true);
+    //             }
+    //             _moneyController.RemoveMoney(costs[1]);
+    //             levels[1] = level;
+    //         }
+    //     }
+    // } 
+    public void UpgradeTurret(int turretIndex, int level)
     {
-        if (costs[1] <= _moneyController.GetMoney())
+        if (level == 1)
         {
-            if (level - 1 < 4)
+            if (costs[1] <= _moneyController.GetMoney())
             {
-                for (int i = 0; i < level; i++)
-                {
-                    turretList[i].SetActive(true);
-                }
+                turretList[turretIndex].SetActive(true);
                 _moneyController.RemoveMoney(costs[1]);
-                levels[1] = level;
+                levels[1 + turretIndex] = level;
             }
-        }
-    } 
-    public void UpgradeTurretDamage(int turretIndex, int level)
-    {
-        if (costs[2] <= _moneyController.GetMoney())
+        }else if (level > 1 && level <= 5)
         {
-            GameObject turret = turretList[turretIndex];
-            turret.GetComponent<TurretController>().SetFireRate(turretData[level - 1].Item1);
-            turret.GetComponent<ShootingSystem>().SetDamage(turretData[level - 1].Item2);
-            _moneyController.RemoveMoney(costs[2]);
-            levels[2 + turretIndex] = level;
+            if (costs[2] <= _moneyController.GetMoney())
+            {
+                turretList[turretIndex].GetComponent<TurretController>().SetFireRate(turretData[level - 2].Item1);
+                turretList[turretIndex].GetComponent<ShootingSystem>().SetDamage(turretData[level - 2].Item2);
+                _moneyController.RemoveMoney(costs[2]);
+                levels[1 + turretIndex] = level;
+            }
         }
     }
     
@@ -152,7 +157,7 @@ public class UpgradeController : MonoBehaviour
         }
     }
 
-    public void UpgradeHP(int level)
+    public void UpgradeHp(int level)
     {
         if (costs[4] <= _moneyController.GetMoney())
         {
@@ -175,7 +180,7 @@ public class UpgradeController : MonoBehaviour
         
     }
 
-    public GameObject[] getTurrets()
+    public GameObject[] GetTurrets()
     {
         return turretList;
     }
