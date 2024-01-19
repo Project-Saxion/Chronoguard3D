@@ -22,10 +22,10 @@ namespace Game.Scripts.Enemy
         
         private void Update()
         {
-            if (enemiesLeft == 0)
-            {
-                spawnWave(currentWave);
-            }
+            // if (enemiesLeft == 0)
+            // {
+            //     spawnWave(currentWave);
+            // }
         }
         
         public void spawnWave(int wave)
@@ -84,7 +84,8 @@ namespace Game.Scripts.Enemy
                     Vector3 spawnLocation = spawnLocations[temp];
                     GameObject spawnEnemy = Instantiate(enemies[i], spawnLocation, parentObject.transform.rotation, parentObject.transform);
                     enemiesLeft++;
-                    // spawnEnemy.GetComponent<HealthController>().setHealth(healthEnemy);
+                    spawnEnemy.transform.GetChild(enemyTier).gameObject.SetActive(true);
+                    // spawnEnemy.GetComponent<HealthController>().SetHealth(healthEnemy);
                 }
             }
         }
