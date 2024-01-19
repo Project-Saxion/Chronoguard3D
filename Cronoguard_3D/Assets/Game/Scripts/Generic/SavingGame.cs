@@ -13,12 +13,20 @@ public class SavingGame : MonoBehaviour
     //     SaveGame("testFile");
     // }
 
-    public List<string> getSaveGames()
+    public List<string> GetSaveGames()
     {
-
         return Directory.GetFiles(Application.persistentDataPath)
+            .Select(item => item.Split("\\")[item.Split("\\").Length - 1])
             .Select(item => item.Substring(0, item.Length - 5))
             .ToList();
+    }
+
+    public void printSaveGames()
+    {
+        foreach (var savegame in GetSaveGames())
+        {
+            Debug.Log(savegame);
+        }
     }
 
     public string currentSave;
@@ -71,13 +79,12 @@ public class SavingGame : MonoBehaviour
 
             moneyController.AddMoney(int.MaxValue);
             upgradeController.UpgradeBaseHp(save.levels[0]);
-            upgradeController.UpgradeTurret(save.levels[1]);
-            upgradeController.UpgradeTurretDamage(0, save.levels[2]);
-            upgradeController.UpgradeTurretDamage(1, save.levels[3]);
-            upgradeController.UpgradeTurretDamage(2, save.levels[4]);
-            upgradeController.UpgradeTurretDamage(3, save.levels[5]);
+            upgradeController.UpgradeTurret(0, save.levels[2]);
+            upgradeController.UpgradeTurret(1, save.levels[3]);
+            upgradeController.UpgradeTurret(2, save.levels[4]);
+            upgradeController.UpgradeTurret(3, save.levels[5]);
             upgradeController.UpgradeAttack(save.levels[6]);
-            upgradeController.UpgradeHP(save.levels[7]);
+            upgradeController.UpgradeHp(save.levels[7]);
             moneyController.RemoveMoney(moneyController.GetMoney() - save.money);
             healthControllerPlayer.SetHealth(save.healthBase);
             healthControllerBase.SetHealth(save.healthPlayer);
