@@ -63,9 +63,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public float velPower;
     
     private bool isFowarward = false;
-    private bool isBackward = false;
-    private bool isLeftward = false;
-    private bool isRightward = false;
+    private float vertical;
+    private float horizontal;
+    private WeaponRotation weaponRotation;
     public Animator animator; 
 
     private void Awake()
@@ -91,6 +91,8 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         attackModifier = attacking[0].GetModifier();
+        vertical = weaponRotation.GetVertical();
+        horizontal = weaponRotation.GetHorizontal();
     }
 
     private void FixedUpdate()

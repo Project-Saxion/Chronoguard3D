@@ -4,12 +4,15 @@ using System.Numerics;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Quaternion = UnityEngine.Quaternion;
+using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
 
 public class WeaponRotation : MonoBehaviour
 {
     private Camera mainCam;
-    private Vector3 mousePos;
+    private float vertical;
+    private float horizontal;
+    public Vector3 mousePos;
     
     [SerializeField] private LayerMask groundMask;
 
@@ -23,6 +26,8 @@ public class WeaponRotation : MonoBehaviour
     void Update()
     {
         Aim();
+        GetVertical();
+        GetHorizontal();
     }
 
     private void Aim()
@@ -51,4 +56,27 @@ public class WeaponRotation : MonoBehaviour
             return (success: false, position: Vector3.zero);
         }
     }
+
+    public float GetVertical()
+    {
+        float angleVer = Vector2.SignedAngle(- transform.up, mousePos);
+        
+
+        if (angleVer > 90 || angleVer < -90) {
+            angleVer = angleVer > 0 ? 180 - angleVer : -180 - angleVer;
+        }
+        
+        return angleVer;
+    }
+
+    public float GetHorizontal()
+    {
+        float angleHor = Vector2.SignedAngle(transform.right, mousePos);
+        
+        if (angleHor > 90 || angleHor < -90) {
+            angleHor = angleHor > 0 ? 180 - angleHor : -180 - angleHor;
+        }
+
+        return angleHor;
+    } 
 }
