@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
@@ -48,6 +50,11 @@ public class PlayerController : MonoBehaviour
     public float heavyAttackTime;
     public float heavyAttackDuration;
     public float heavyAttackCooldown;
+    
+    private Camera mainCam;
+    // public Vector3 mousePos;
+    
+    [SerializeField] private LayerMask groundMask;
 
     
     // Either make 3 different Attack items, or have a list that only get's 2/3rd of modifiers...
@@ -65,7 +72,9 @@ public class PlayerController : MonoBehaviour
     private bool isFowarward = false;
     private float vertical;
     private float horizontal;
-    private WeaponRotation weaponRotation;
+
+    private Vector3 moveDirection;
+    // private WeaponRotation weaponRotation;
     public Animator animator; 
 
     private void Awake()
@@ -90,9 +99,10 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         attackModifier = attacking[0].GetModifier();
-        vertical = weaponRotation.GetVertical();
-        horizontal = weaponRotation.GetHorizontal();
+        // vertical = weaponRotation.GetVertical();
+        // horizontal = weaponRotation.GetHorizontal();
     }
 
     private void FixedUpdate()
@@ -107,8 +117,15 @@ public class PlayerController : MonoBehaviour
         CheckMeleeTimer();
         CheckHeavyAttackTimer();
 
-        AnimateRun(rb.velocity);
-        Debug.Log(rb.velocity);
+        AnimatePlayerMovement();
+        // animator.SetFloat("Vertical", vertical / 90);
+        // animator.SetFloat("Horizontal", horizontal / 90);
+        // Debug.Log(rb.velocity);
+    }
+
+    private void Update()
+    {
+        PointTo();
     }
 
     private void OnDisable()
@@ -148,13 +165,48 @@ public class PlayerController : MonoBehaviour
         rb.AddForce(movementVel);
     }
 
-    void AnimateRun(Vector3 desiredDirection)
+    void AnimatePlayerMovement()
     {
-        isFowarward = (desiredDirection.x > 0.1f || desiredDirection.x < -0.1f) ||
-                    (desiredDirection.z > 0.1f || desiredDirection.z < -0.1f)
-            ? true
-            : false;
-        animator.SetBool("isRunning", isFowarward);
+
+        float h = moveDir.z;
+        float v = moveDir.x;
+        moveDirection = new Vector3(h, 0, v);
+        
+        Vector3 mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 towardCursor = mousePos - transform.position;
+
+        float angleVert = Vector2.SignedAngle(transform.right, towardCursor);
+        float angleHori = Vector2.SignedAngle(-transform.up, towardCursor);
+
+        if (moveDirection.magnitude > 1.0f)
+        {
+            moveDirection = moveDirection.normalized;
+            // animator.SetBool("isIdle", true);
+        }
+        moveDirection = transform.InverseTransformDirection(moveDirection);
+        
+        
+        if (rb.velocity.magnitude is < 0.1f and > -0.1f)
+        {
+            animator.SetBool("isIdle", true);
+        }
+        else
+        {
+            animator.SetBool("isIdle", false);
+        }
+        //
+        // if (angleVert > 90 || angleVert < -90)
+        // {
+        //     angleVert = angleVert > 0 ? 180 - angleVert : -180 - angleVert;
+        // }
+        //
+        // if (angleHori > 90 || angleHori < -90)
+        // {
+        //     angleHori = angleHori > 0 ? 180 - angleHori : -180 - angleHori;
+        // }
+        
+        animator.SetFloat("Vertical", moveDirection.z);
+        animator.SetFloat("Horizontal", moveDirection.x);
     }
     
     private void Attack(InputAction.CallbackContext context) 
@@ -225,6 +277,33 @@ public class PlayerController : MonoBehaviour
             attackCooldown,
             heavyAttackCooldown
         };
+    }
+    
+    private void PointTo()
+    {
+        var (success, position) = GetMousePosition();
+
+        if (success)
+        {
+            var direction = position - transform.position;
+            direction.y = 0;
+
+            transform.forward = direction;
+        }
+    }
+
+    private (bool success, Vector3 position) GetMousePosition()
+    {
+        var ray = mainCam.ScreenPointToRay(Input.mousePosition);
+
+        if (Physics.Raycast(ray, out var hitInfo, Mathf.Infinity, groundMask))
+        {
+            return (success: true, position: hitInfo.point);
+        }
+        else
+        {
+            return (success: false, position: Vector3.zero);
+        }
     }
 }
 
