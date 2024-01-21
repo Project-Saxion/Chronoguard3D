@@ -14,10 +14,10 @@ public class Attack : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-        HealthController healthController = collision.transform.parent.GetComponent<HealthController>();
+        HealthController healthController = collision.transform.root.GetComponent<HealthController>();
         if (healthController != null)
         {
-            //healthController.doDamage(Mathf.CeilToInt(damage * modifier));
+            healthController.DoDamage(Mathf.CeilToInt(damage * modifier));
 
             if (weaponType == WeaponType.Bullet)
             {

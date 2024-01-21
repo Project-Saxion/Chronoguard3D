@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour
 {
@@ -28,7 +29,7 @@ public class PlayerController : MonoBehaviour
     public UnityEvent basicAttackEvent;
     public UnityEvent heavyAttackEvent;
     
-    public GameObject Melee;
+    public GameObject SwordHitBox;
     public GameObject HeavyAttack;
     public LayerMask enemies;
     
@@ -52,7 +53,6 @@ public class PlayerController : MonoBehaviour
     public float heavyAttackCooldown;
     
     private Camera mainCam;
-    // public Vector3 mousePos;
     
     [SerializeField] private LayerMask groundMask;
 
@@ -68,13 +68,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public float acceleration;
     [SerializeField] public float decceleration;
     [SerializeField] public float velPower;
-    
-    private bool isFowarward = false;
-    private float vertical;
-    private float horizontal;
 
     private Vector3 moveDirection;
-    // private WeaponRotation weaponRotation;
     public Animator animator; 
 
     private void Awake()
@@ -101,8 +96,6 @@ public class PlayerController : MonoBehaviour
     {
         mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         attackModifier = attacking[0].GetModifier();
-        // vertical = weaponRotation.GetVertical();
-        // horizontal = weaponRotation.GetHorizontal();
     }
 
     private void FixedUpdate()
@@ -116,11 +109,7 @@ public class PlayerController : MonoBehaviour
         
         CheckMeleeTimer();
         CheckHeavyAttackTimer();
-
         AnimatePlayerMovement();
-        // animator.SetFloat("Vertical", vertical / 90);
-        // animator.SetFloat("Horizontal", horizontal / 90);
-        // Debug.Log(rb.velocity);
     }
 
     private void Update()
@@ -167,7 +156,6 @@ public class PlayerController : MonoBehaviour
 
     void AnimatePlayerMovement()
     {
-
         float h = moveDir.z;
         float v = moveDir.x;
         moveDirection = new Vector3(h, 0, v);
@@ -175,13 +163,9 @@ public class PlayerController : MonoBehaviour
         Vector3 mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
         Vector2 towardCursor = mousePos - transform.position;
 
-        float angleVert = Vector2.SignedAngle(transform.right, towardCursor);
-        float angleHori = Vector2.SignedAngle(-transform.up, towardCursor);
-
         if (moveDirection.magnitude > 1.0f)
         {
             moveDirection = moveDirection.normalized;
-            // animator.SetBool("isIdle", true);
         }
         moveDirection = transform.InverseTransformDirection(moveDirection);
         
@@ -194,16 +178,6 @@ public class PlayerController : MonoBehaviour
         {
             animator.SetBool("isIdle", false);
         }
-        //
-        // if (angleVert > 90 || angleVert < -90)
-        // {
-        //     angleVert = angleVert > 0 ? 180 - angleVert : -180 - angleVert;
-        // }
-        //
-        // if (angleHori > 90 || angleHori < -90)
-        // {
-        //     angleHori = angleHori > 0 ? 180 - angleHori : -180 - angleHori;
-        // }
         
         animator.SetFloat("Vertical", moveDirection.z);
         animator.SetFloat("Horizontal", moveDirection.x);
@@ -221,7 +195,7 @@ public class PlayerController : MonoBehaviour
             
             if (!isAttacking)
             {
-                Melee.SetActive(true);
+                SwordHitBox.SetActive(true);
                 isAttacking = true;
                 animator.SetTrigger("isAttacking");
             }
@@ -245,6 +219,7 @@ public class PlayerController : MonoBehaviour
             heavyAttackTime = 0;
             if (!heavyIsAttacking)
             {
+                animator.SetTrigger("isHeavyAttacking");
                 HeavyAttack.SetActive(true);
                 heavyIsAttacking = true;
             }
@@ -256,7 +231,7 @@ public class PlayerController : MonoBehaviour
         if (isAttacking && attackTime >= attackDuration)
         {
             isAttacking = false;
-            Melee.SetActive(false);
+            SwordHitBox.SetActive(false);
         }
     }
 
