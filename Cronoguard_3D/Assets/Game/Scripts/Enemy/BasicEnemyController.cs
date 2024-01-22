@@ -35,6 +35,9 @@ public class BasicEnemyController : MonoBehaviour
     private float _playerSize;
     private float _targetSize;
     
+    Vector3 closestSurfacePoint1;
+    Vector3 closestSurfacePoint2;
+    
     private void Start()
     {
         _attackTime = Time.time;
@@ -42,7 +45,7 @@ public class BasicEnemyController : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         mainTarget = GameObject.FindGameObjectWithTag("Base");
         navMeshAgent = GetComponent<NavMeshAgent>();
-        rb = rb.GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
         
         _targetSize = _mainTargetSize;
 
@@ -63,7 +66,7 @@ public class BasicEnemyController : MonoBehaviour
     {
         foreach (Animator animator in characterAnimators)
         {
-            animator.SetFloat("Velocity", rb.velocity.magnitude);
+            animator.SetFloat("Velocity", navMeshAgent.velocity.magnitude);
         }
     }
 
@@ -121,15 +124,19 @@ public class BasicEnemyController : MonoBehaviour
 
     void StopOnAttackRange()
     {
-        if (Vector3.Distance(transform.position, _target.position) < attackRange)
+        if (/*Vector3.Distance(transform.position, _target.position)*/GetTrueDistance() < attackRange)
         {
             SetFollowing(false);
             RotateToTarget();
             Attack();
+            Debug.Log("test1");
+            Debug.Log("1 - " + GetTrueDistance());
         }
-        else if (!IsFollowing())
+        else if (!IsFollowing() && GetTrueDistance() > attackRange)
         {
             SetFollowing(true);
+            Debug.Log("test2");
+            Debug.Log("2 - " + GetTrueDistance());
         }
     }
 
@@ -139,6 +146,12 @@ public class BasicEnemyController : MonoBehaviour
         {
             onAttack.Invoke();
             _attackTime = Time.time;
+
+            foreach (Animator animator in characterAnimators)
+            {
+                animator.ResetTrigger("Attack");
+                animator.SetTrigger("Attack");
+            }
         }
     }
 
@@ -150,11 +163,15 @@ public class BasicEnemyController : MonoBehaviour
             TurretController turretController = turret.GetComponent<TurretController>();
             turretController.RemoveTargetFromList(gameObject);
         }
-        
-        
 
+        foreach (Animator animator in characterAnimators)
+        {
+            animator.SetTrigger("Death");
+        }
+
+        SetTarget(transform);
         enemySpawning.DestroyEnemy();
-        Destroy(gameObject);
+//        Destroy(gameObject);
     }
     
     private void OnCollisionStay2D(Collision2D other)
@@ -177,4 +194,19 @@ public class BasicEnemyController : MonoBehaviour
         Quaternion rotation = Quaternion.LookRotation(lookPos);
         transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 10);
     }
+
+    float GetTrueDistance()
+    {
+        // the surface point of this collider that is closer to the position of the other collider
+        closestSurfacePoint1 = GetComponentInChildren<Collider>().ClosestPointOnBounds(_target.transform.position);
+       
+        // the surface point of the other collider that is closer to the position of this collider
+        closestSurfacePoint2 = _target.GetComponentInChildren<Collider>().ClosestPointOnBounds(transform.position);
+       
+        // the distance between the surfaces of the 2 colliders
+        float surfaceDistance = Vector3.Distance(closestSurfacePoint1, closestSurfacePoint2);
+        return surfaceDistance;
+    }
+    
+
 }
