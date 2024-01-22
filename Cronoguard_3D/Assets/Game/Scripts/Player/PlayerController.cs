@@ -1,9 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour
 {
@@ -26,7 +29,7 @@ public class PlayerController : MonoBehaviour
     public UnityEvent basicAttackEvent;
     public UnityEvent heavyAttackEvent;
     
-    public GameObject Melee;
+    public GameObject SwordHitBox;
     public GameObject HeavyAttack;
     public LayerMask enemies;
     
@@ -40,6 +43,7 @@ public class PlayerController : MonoBehaviour
     public Transform Aim;
     public GameObject bullet;
     public float fireForce = 10;
+    public float shootDuration;
     public float shootCooldown = 0.25f;
     public float shootTimer = 0.5f;    
     
@@ -48,6 +52,10 @@ public class PlayerController : MonoBehaviour
     public float heavyAttackTime;
     public float heavyAttackDuration;
     public float heavyAttackCooldown;
+    
+    private Camera mainCam;
+    
+    [SerializeField] private LayerMask groundMask;
 
     
     // Either make 3 different Attack items, or have a list that only get's 2/3rd of modifiers...
@@ -61,6 +69,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public float acceleration;
     [SerializeField] public float decceleration;
     [SerializeField] public float velPower;
+
+    private Vector3 moveDirection;
+    public Animator animator; 
 
     private void Awake()
     {
@@ -84,10 +95,11 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         attackModifier = attacking[0].GetModifier();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         MovePlayer();
         
@@ -98,6 +110,12 @@ public class PlayerController : MonoBehaviour
         
         CheckMeleeTimer();
         CheckHeavyAttackTimer();
+        AnimatePlayerMovement();
+    }
+
+    private void Update()
+    {
+        PointTo();
     }
 
     private void OnDisable()
@@ -136,6 +154,35 @@ public class PlayerController : MonoBehaviour
 
         rb.AddForce(movementVel);
     }
+
+    void AnimatePlayerMovement()
+    {
+        float h = moveDir.z;
+        float v = moveDir.x;
+        moveDirection = new Vector3(h, 0, v);
+        
+        Vector3 mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 towardCursor = mousePos - transform.position;
+
+        if (moveDirection.magnitude > 1.0f)
+        {
+            moveDirection = moveDirection.normalized;
+        }
+        moveDirection = transform.InverseTransformDirection(moveDirection);
+        
+        
+        if (rb.velocity.magnitude is < 0.1f and > -0.1f)
+        {
+            animator.SetBool("isIdle", true);
+        }
+        else
+        {
+            animator.SetBool("isIdle", false);
+        }
+        
+        animator.SetFloat("Vertical", moveDirection.z);
+        animator.SetFloat("Horizontal", moveDirection.x);
+    }
     
     private void Attack(InputAction.CallbackContext context) 
     {
@@ -149,8 +196,9 @@ public class PlayerController : MonoBehaviour
             
             if (!isAttacking)
             {
-                Melee.SetActive(true);
+                SwordHitBox.SetActive(true);
                 isAttacking = true;
+                animator.SetTrigger("isAttacking");
             }
         }
     }
@@ -159,8 +207,13 @@ public class PlayerController : MonoBehaviour
     {
         if (shootTimer > shootCooldown)
         {
-            shootTimer = 0;
-            ShootingSystem.Attack(tagsToDamage);
+            animator.SetTrigger("isRangedAttacking");
+            
+            if (shootTimer > shootDuration)
+            {
+                shootTimer = 0;
+                ShootingSystem.Attack(tagsToDamage);
+            }
         }
     }
 
@@ -172,6 +225,7 @@ public class PlayerController : MonoBehaviour
             heavyAttackTime = 0;
             if (!heavyIsAttacking)
             {
+                animator.SetTrigger("isHeavyAttacking");
                 HeavyAttack.SetActive(true);
                 heavyIsAttacking = true;
             }
@@ -183,7 +237,7 @@ public class PlayerController : MonoBehaviour
         if (isAttacking && attackTime >= attackDuration)
         {
             isAttacking = false;
-            Melee.SetActive(false);
+            SwordHitBox.SetActive(false);
         }
     }
 
@@ -204,6 +258,33 @@ public class PlayerController : MonoBehaviour
             attackCooldown,
             heavyAttackCooldown
         };
+    }
+    
+    private void PointTo()
+    {
+        var (success, position) = GetMousePosition();
+
+        if (success)
+        {
+            var direction = position - transform.position;
+            direction.y = 0;
+
+            transform.forward = direction;
+        }
+    }
+
+    private (bool success, Vector3 position) GetMousePosition()
+    {
+        var ray = mainCam.ScreenPointToRay(Input.mousePosition);
+
+        if (Physics.Raycast(ray, out var hitInfo, Mathf.Infinity, groundMask))
+        {
+            return (success: true, position: hitInfo.point);
+        }
+        else
+        {
+            return (success: false, position: Vector3.zero);
+        }
     }
 }
 
