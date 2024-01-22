@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UpgradeController : MonoBehaviour
 {
@@ -51,6 +52,23 @@ public class UpgradeController : MonoBehaviour
         (0.8f, 6),
         (0.8f, 10),
         (0.5f, 10)
+    };
+
+    private List<(double, double, double)> turretTransformData = new List<(double, double, double)>
+    {
+        (5, 7.38, 5.9),    // T1 SpaceBase
+        (5, 7.38, -5.5),   // T2 SpaceBase
+        (-5, 7.38, 5.9),   // T3 SpaceBase
+        (-5, 7.38, -5.5),  // T4 SpaceBase
+        (6, 5.08, 6.5),    // T1 WarBase
+        (6, 5.08, -6.1),   // T2 WarBase
+        (-6.6, 5.08, 6.5), // T3 WarBase
+        (-6.6, 5.08, -6.1),// T4 WarBase
+        (6.4, 2.8, 6.2),   // T1 WesternBase
+        (6.4, 2.8, -5.8),  // T2 WesternBase
+        (-6.2, 2.8, 6.2),  // T3 WesternBase
+        (-6.2, 2.8, -5.8)  // T4 WesternBase
+        
     };
     
     private MoneyController _moneyController;
