@@ -125,6 +125,15 @@ public partial class @MenuController: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""OpenMainMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""32311738-9e32-4d4c-b452-72f3f4431eda"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -523,6 +532,28 @@ public partial class @MenuController: IInputActionCollection2, IDisposable
                     ""action"": ""OpenUpgradeMenu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8fa4c3f7-ed5c-4a78-b726-fa567c58da3b"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""OpenMainMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8ad4ab5d-62ea-469f-9725-92ec694999ca"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""OpenMainMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -603,6 +634,7 @@ public partial class @MenuController: IInputActionCollection2, IDisposable
         m_UI_TrackedDevicePosition = m_UI.FindAction("TrackedDevicePosition", throwIfNotFound: true);
         m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
         m_UI_OpenUpgradeMenu = m_UI.FindAction("OpenUpgradeMenu", throwIfNotFound: true);
+        m_UI_OpenMainMenu = m_UI.FindAction("OpenMainMenu", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -675,6 +707,7 @@ public partial class @MenuController: IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_TrackedDevicePosition;
     private readonly InputAction m_UI_TrackedDeviceOrientation;
     private readonly InputAction m_UI_OpenUpgradeMenu;
+    private readonly InputAction m_UI_OpenMainMenu;
     public struct UIActions
     {
         private @MenuController m_Wrapper;
@@ -690,6 +723,7 @@ public partial class @MenuController: IInputActionCollection2, IDisposable
         public InputAction @TrackedDevicePosition => m_Wrapper.m_UI_TrackedDevicePosition;
         public InputAction @TrackedDeviceOrientation => m_Wrapper.m_UI_TrackedDeviceOrientation;
         public InputAction @OpenUpgradeMenu => m_Wrapper.m_UI_OpenUpgradeMenu;
+        public InputAction @OpenMainMenu => m_Wrapper.m_UI_OpenMainMenu;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -732,6 +766,9 @@ public partial class @MenuController: IInputActionCollection2, IDisposable
             @OpenUpgradeMenu.started += instance.OnOpenUpgradeMenu;
             @OpenUpgradeMenu.performed += instance.OnOpenUpgradeMenu;
             @OpenUpgradeMenu.canceled += instance.OnOpenUpgradeMenu;
+            @OpenMainMenu.started += instance.OnOpenMainMenu;
+            @OpenMainMenu.performed += instance.OnOpenMainMenu;
+            @OpenMainMenu.canceled += instance.OnOpenMainMenu;
         }
 
         private void UnregisterCallbacks(IUIActions instance)
@@ -769,6 +806,9 @@ public partial class @MenuController: IInputActionCollection2, IDisposable
             @OpenUpgradeMenu.started -= instance.OnOpenUpgradeMenu;
             @OpenUpgradeMenu.performed -= instance.OnOpenUpgradeMenu;
             @OpenUpgradeMenu.canceled -= instance.OnOpenUpgradeMenu;
+            @OpenMainMenu.started -= instance.OnOpenMainMenu;
+            @OpenMainMenu.performed -= instance.OnOpenMainMenu;
+            @OpenMainMenu.canceled -= instance.OnOpenMainMenu;
         }
 
         public void RemoveCallbacks(IUIActions instance)
@@ -844,5 +884,6 @@ public partial class @MenuController: IInputActionCollection2, IDisposable
         void OnTrackedDevicePosition(InputAction.CallbackContext context);
         void OnTrackedDeviceOrientation(InputAction.CallbackContext context);
         void OnOpenUpgradeMenu(InputAction.CallbackContext context);
+        void OnOpenMainMenu(InputAction.CallbackContext context);
     }
 }

@@ -87,7 +87,7 @@ namespace Game.Scripts.Enemy
                     Vector3 spawnLocation = spawnLocations[temp];
                     GameObject spawnEnemy = Instantiate(enemies[i], spawnLocation, parentObject.transform.rotation, parentObject.transform);
                     enemiesLeft++;
-                    spawnEnemy.transform.GetChild(enemyTier).gameObject.SetActive(true);
+                    spawnEnemy.transform.GetChild(enemyTier - 1).gameObject.SetActive(true);
                     // spawnEnemy.GetComponent<HealthController>().SetHealth(healthEnemy);
                 }
             }
