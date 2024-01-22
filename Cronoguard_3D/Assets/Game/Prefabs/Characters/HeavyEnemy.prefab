@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 665784026803788827}
   - component: {fileID: 1669256893961313331}
   - component: {fileID: 2940249644802857700}
+  - component: {fileID: 1476930557089912162}
   m_Layer: 0
   m_Name: HeavyEnemy
   m_TagString: Enemy
@@ -140,6 +141,37 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1476930557089912162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5701702961339348261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8da65207c161de0459abc7335508fdb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 15
+  healRate: 0
+  healTimer: 0
+  autoHeal: 0
+  death:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6057044520494146527}
+        m_TargetAssemblyTypeName: BasicEnemyController, Assembly-CSharp
+        m_MethodName: Die
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &1556606378978661545
 PrefabInstance:
   m_ObjectHideFlags: 0

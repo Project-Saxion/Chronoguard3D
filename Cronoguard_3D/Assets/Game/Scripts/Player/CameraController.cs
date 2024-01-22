@@ -22,9 +22,7 @@ public class CameraController : MonoBehaviour
 
     void FollowPlayer(float _zOffset, float _yOffset)
     {
-        Vector3 targetPosition = player.transform.position
-            - (player.transform.forward * _zOffset)
-            + (player.transform.up * _yOffset);
+        Vector3 targetPosition = player.transform.position - new Vector3(0, 0, _zOffset) + (player.transform.up * _yOffset);
 
         transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime);
     }
