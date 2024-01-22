@@ -84,7 +84,7 @@ public class HealthController : MonoBehaviour
     }
     
     
-    void Start()
+    void Awake()
     {
         _maxHealth = health;
         _startTime = Time.time;
