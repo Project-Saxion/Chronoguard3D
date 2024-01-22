@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17106682, g: 0.20409152, b: 0.24157858, a: 1}
+  m_IndirectSpecularColor: {r: 0.17107111, g: 0.20409933, b: 0.24159288, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1111,7 +1111,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 382167304}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1037885478}
+        m_TargetAssemblyTypeName: SavingGame, Assembly-CSharp
+        m_MethodName: LoadGame
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: save1
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &382167304
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1307,7 +1319,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 442607920}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1037885477}
+        m_TargetAssemblyTypeName: UpgradeController, Assembly-CSharp
+        m_MethodName: UpgradeBaseHp
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &442607920
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1751,7 +1775,7 @@ MonoBehaviour:
   - 1.25
   - 1.25
   - 1.25
-  levels: 01000000010000000100000001000000010000000100000001000000
+  levels: 00000000000000000000000000000000000000000000000000000000
   playerStartAttack: 0
   playerStartHealth: 0
   playerMaxHealth: 0
@@ -2542,7 +2566,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1263824813}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1037885477}
+        m_TargetAssemblyTypeName: UpgradeController, Assembly-CSharp
+        m_MethodName: UpgradeBaseHp
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1263824813
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3044,7 +3080,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1436534713}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1037885478}
+        m_TargetAssemblyTypeName: SavingGame, Assembly-CSharp
+        m_MethodName: DeleteGame
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: save1
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1436534713
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3446,6 +3494,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeUI: {fileID: 14576830}
   buttonToSelect: {fileID: 382167303}
+  levelTexts: []
+  gameManager: {fileID: 0}
 --- !u!1 &1664312970
 GameObject:
   m_ObjectHideFlags: 0
@@ -3787,7 +3837,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1834837939}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1037885478}
+        m_TargetAssemblyTypeName: SavingGame, Assembly-CSharp
+        m_MethodName: printSaveGames
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1834837939
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4060,7 +4122,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1868147343}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1037885478}
+        m_TargetAssemblyTypeName: SavingGame, Assembly-CSharp
+        m_MethodName: printValues
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1868147343
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4605,7 +4679,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2041988532}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1037885478}
+        m_TargetAssemblyTypeName: SavingGame, Assembly-CSharp
+        m_MethodName: SaveGame
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: save1
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2041988532
 MonoBehaviour:
   m_ObjectHideFlags: 0

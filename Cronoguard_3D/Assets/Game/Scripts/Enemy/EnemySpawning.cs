@@ -19,12 +19,14 @@ namespace Game.Scripts.Enemy
         public int enemySpawnHeight = 10;
         public int currentWave = 1;
         private int enemiesLeft = 0;
-        
+        private SavingGame savingGame;
         private void Update()
         {
             if (enemiesLeft == 0)
             {
                 spawnWave(currentWave);
+                savingGame.DeleteGame("save");
+                savingGame.SaveGame("save");
             }
         }
         
@@ -65,10 +67,11 @@ namespace Game.Scripts.Enemy
                 float x = (Mathf.Cos(angleInRadians) * radius) + locationMainTarget.x;
                 float z = (Mathf.Sin(angleInRadians) * radius) + locationMainTarget.z;
                 spawnLocations[i] = new Vector3(x, enemySpawnHeight, z);
-            } 
-            
+            }
+
+            savingGame = GetComponent<SavingGame>();
             enemyScaling = GetComponent<EnemyScaling>();
-            spawnWave(currentWave);
+            // spawnWave(currentWave);
         }
         
         private void spawnEnemies(int enemyTier, int pointAmount)
@@ -84,7 +87,8 @@ namespace Game.Scripts.Enemy
                     Vector3 spawnLocation = spawnLocations[temp];
                     GameObject spawnEnemy = Instantiate(enemies[i], spawnLocation, parentObject.transform.rotation, parentObject.transform);
                     enemiesLeft++;
-                    // spawnEnemy.GetComponent<HealthController>().setHealth(healthEnemy);
+                    spawnEnemy.transform.GetChild(enemyTier).gameObject.SetActive(true);
+                    // spawnEnemy.GetComponent<HealthController>().SetHealth(healthEnemy);
                 }
             }
         }
