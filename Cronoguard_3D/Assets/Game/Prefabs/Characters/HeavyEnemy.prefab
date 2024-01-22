@@ -60,7 +60,7 @@ MonoBehaviour:
   - {fileID: 1497667559869114249}
   enemySpawning: {fileID: 0}
   movementSpeed: 3
-  targetRange: 2
+  targetRange: 5
   attackRange: 3
   attackCooldown: 5
   onAttack:
@@ -604,7 +604,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 192002, guid: bc4987e2fb189ec4d96488b047577016, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 441856, guid: bc4987e2fb189ec4d96488b047577016, type: 3}
       propertyPath: m_LocalScale.x
