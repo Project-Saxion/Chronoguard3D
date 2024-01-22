@@ -129,14 +129,10 @@ public class BasicEnemyController : MonoBehaviour
             SetFollowing(false);
             RotateToTarget();
             Attack();
-            Debug.Log("test1");
-            Debug.Log("1 - " + GetTrueDistance());
         }
         else if (!IsFollowing() && GetTrueDistance() > attackRange)
         {
             SetFollowing(true);
-            Debug.Log("test2");
-            Debug.Log("2 - " + GetTrueDistance());
         }
     }
 
