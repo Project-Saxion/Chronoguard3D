@@ -43,6 +43,7 @@ public class PlayerController : MonoBehaviour
     public Transform Aim;
     public GameObject bullet;
     public float fireForce = 10;
+    public float shootDuration;
     public float shootCooldown = 0.25f;
     public float shootTimer = 0.5f;    
     
@@ -206,8 +207,13 @@ public class PlayerController : MonoBehaviour
     {
         if (shootTimer > shootCooldown)
         {
-            shootTimer = 0;
-            ShootingSystem.Attack(tagsToDamage);
+            animator.SetTrigger("isRangedAttacking");
+            
+            if (shootTimer > shootDuration)
+            {
+                shootTimer = 0;
+                ShootingSystem.Attack(tagsToDamage);
+            }
         }
     }
 
