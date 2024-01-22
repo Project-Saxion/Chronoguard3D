@@ -50,7 +50,7 @@ public class CooldownController : MonoBehaviour
             basicAttackTimer -= Time.deltaTime;
             if (basicAttackTimer > 0.0f)
             {
-                basicAttackOverlay.fillAmount = basicAttackTimer / _attackCooldowns[0];
+                basicAttackOverlay.fillAmount = 1- (basicAttackTimer / _attackCooldowns[0]);
             }
             else
             {
@@ -63,7 +63,7 @@ public class CooldownController : MonoBehaviour
             heavyAttackTimer -= Time.deltaTime;
             if (heavyAttackTimer > 0.0f)
             {
-                heavyAttackOverlay.fillAmount = heavyAttackTimer / _attackCooldowns[1];
+                heavyAttackOverlay.fillAmount = 1 - (heavyAttackTimer / _attackCooldowns[1]);
             }
             else
             {

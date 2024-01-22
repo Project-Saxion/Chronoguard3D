@@ -11,9 +11,9 @@ public class UpgradeController : MonoBehaviour
     {
         // Base cost
         50,
-        // Turret Amount cost
+        // Turret First Upgrade cost
         50,
-        // Turret damage cost
+        // Turret DMG cost
         50,
         // Attack cost
         50,
@@ -37,25 +37,20 @@ public class UpgradeController : MonoBehaviour
 
     [SerializeField] private List<int> levels = new List<int>()
     {
-        1, // Base lvl
-        1, // Turret lvl
-        1, // Turret t1
-        1, // Turret t2
-        1, // Turret t3
-        1, // Turret t4
-        1, // Attack lvl
-        1, // HP lvl
-    };
+        0, // Base lvl
+        0, // Turret t1
+        0, // Turret t2
+        0, // Turret t3
+        0, // Turret t4
+        0, // Player Attack lvl
+        0, // Player HP lvl
+    }; 
     private List<(float, int)> turretData = new List<(float, int)>
     {
         (1, 6),
         (0.8f, 6),
         (0.8f, 10),
         (0.5f, 10)
-    };
-
-    [SerializeField] private List<float> startValues = new List<float>()
-    {
     };
     
     private MoneyController _moneyController;
@@ -101,12 +96,16 @@ public class UpgradeController : MonoBehaviour
         }
     }
 
+    public void UpgradeBaseHp()
+    {
+        UpgradeBaseHp(levels[0] + 1);
+    }
+
     public void UpgradeBaseHp(int level)
     {
         if (costs[0] <= _moneyController.GetMoney())
         {
             int newHealth = Mathf.CeilToInt((float)(baseStartHealth * Math.Pow(multipliers[0], level)));
-            _baseHealthController.SetHealth(newHealth);
             _baseHealthController.SetMaxHealth(newHealth); 
             
             _moneyController.RemoveMoney(costs[0]);
@@ -114,31 +113,36 @@ public class UpgradeController : MonoBehaviour
         }
     }
 
-    public void UpgradeTurret(int level)
+    public void UpgradeTurret(int turretIndex)
     {
-        if (costs[1] <= _moneyController.GetMoney())
+        UpgradeTurret(turretIndex, levels[1 + turretIndex] + 1);
+    }
+    
+    public void UpgradeTurret(int turretIndex, int level)
+    {
+        if (level == 1)
         {
-            if (level - 1 < 4)
+            if (costs[1] <= _moneyController.GetMoney())
             {
-                for (int i = 0; i < level; i++)
-                {
-                    turretList[i].SetActive(true);
-                }
+                turretList[turretIndex].SetActive(true);
                 _moneyController.RemoveMoney(costs[1]);
-                levels[1] = level;
+                levels[1 + turretIndex] = level;
+            }
+        }else if (level > 1 && level <= 5)
+        {
+            if (costs[2] <= _moneyController.GetMoney())
+            {
+                turretList[turretIndex].GetComponent<TurretController>().SetFireRate(turretData[level - 2].Item1);
+                turretList[turretIndex].GetComponent<ShootingSystem>().SetDamage(turretData[level - 2].Item2);
+                _moneyController.RemoveMoney(costs[2]);
+                levels[1 + turretIndex] = level;
             }
         }
-    } 
-    public void UpgradeTurretDamage(int turretIndex, int level)
+    }
+
+    public void UpgradeAttack()
     {
-        if (costs[2] <= _moneyController.GetMoney())
-        {
-            GameObject turret = turretList[turretIndex];
-            turret.GetComponent<TurretController>().SetFireRate(turretData[level - 1].Item1);
-            turret.GetComponent<ShootingSystem>().SetDamage(turretData[level - 1].Item2);
-            _moneyController.RemoveMoney(costs[2]);
-            levels[2 + turretIndex] = level;
-        }
+        UpgradeAttack(levels[5] + 1);
     }
     
     public void UpgradeAttack(int level)
@@ -148,20 +152,24 @@ public class UpgradeController : MonoBehaviour
             float newAttack = (float)(playerStartAttack * Math.Pow(multipliers[2], level));
             _playerAttackController.attackModifier = newAttack;
             _moneyController.RemoveMoney(costs[3]);
-            levels[6] = level;
+            levels[5] = level;
         }
     }
 
-    public void UpgradeHP(int level)
+    public void UpgradeHp()
+    {
+        UpgradeHp(levels[6] + 1);
+    }
+
+    public void UpgradeHp(int level)
     {
         if (costs[4] <= _moneyController.GetMoney())
         {
             int newHealth = Mathf.CeilToInt((float)(playerStartHealth * Math.Pow(multipliers[3], level)));
-            _playerHealthController.SetHealth(newHealth);
             _playerHealthController.SetMaxHealth(newHealth); 
             playerMaxHealth = Mathf.CeilToInt(newHealth); 
             _moneyController.RemoveMoney(costs[4]);
-            levels[7] = level;
+            levels[6] = level;
         }
     }
 
@@ -175,7 +183,7 @@ public class UpgradeController : MonoBehaviour
         
     }
 
-    public GameObject[] getTurrets()
+    public GameObject[] GetTurrets()
     {
         return turretList;
     }
