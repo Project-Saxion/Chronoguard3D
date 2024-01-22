@@ -76,6 +76,7 @@ GameObject:
   - component: {fileID: 916357987346910688}
   - component: {fileID: 593219947320197693}
   - component: {fileID: 3675640398358054536}
+  - component: {fileID: 4921926739830988951}
   m_Layer: 0
   m_Name: RangedEnemy
   m_TagString: Untagged
@@ -221,6 +222,37 @@ MonoBehaviour:
   tagsToDamage:
   - Base
   - Player
+--- !u!114 &4921926739830988951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6921159028298351446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8da65207c161de0459abc7335508fdb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 15
+  healRate: 0
+  healTimer: 0
+  autoHeal: 0
+  death:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 9123880576206604605}
+        m_TargetAssemblyTypeName: BasicEnemyController, Assembly-CSharp
+        m_MethodName: Die
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8307518151081471040
 GameObject:
   m_ObjectHideFlags: 0
