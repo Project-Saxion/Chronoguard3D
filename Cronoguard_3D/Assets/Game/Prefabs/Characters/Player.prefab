@@ -301,7 +301,7 @@ MonoBehaviour:
   attackModifier: 1
   tagsToDamage:
   - Enemy
-  ShootingSystem: {fileID: 3166777993929589903}
+  shootingSystem: {fileID: 0}
   moveSpeed: 5
   acceleration: 10
   decceleration: 10

@@ -182,7 +182,6 @@ public class PlayerController : MonoBehaviour
             attackModifier = attacking[0].GetModifier();
             attacking[0].SetModifier(attackModifier);
             attacking[1].SetModifier(attackModifier);
-            shootingSystem.SetDamage(Mathf.CeilToInt(shootingDamage * attackModifier));
             
             if (!isAttacking)
             {
@@ -198,6 +197,7 @@ public class PlayerController : MonoBehaviour
         if (shootTimer > shootCooldown)
         {
             animator.SetTrigger("isRangedAttacking");
+            shootingSystem.SetDamage(Mathf.CeilToInt(shootingDamage * attackModifier));
             shootingSystem.Attack(tagsToDamage);
             shootTimer = 0;
         }
