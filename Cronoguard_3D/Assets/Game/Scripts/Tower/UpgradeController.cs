@@ -248,7 +248,7 @@ public class UpgradeController : MonoBehaviour
           Base[level].SetActive(true);
           for (int i = 0; i < 4; i++)
           {
-              ListOfTurrets[i].transform.localPosition = new Vector3(turretTransformData[level * 4 + i - 1].Item1,turretTransformData[level * 4 + i - 1].Item2, turretTransformData[level * 4 + i - 1].Item3);
+              ListOfTurrets[i].transform.localPosition = new Vector3(turretTransformData[level * 4 + i].Item1,turretTransformData[level * 4 + i].Item2, turretTransformData[level * 4 + i].Item3);
           }
 
     }
