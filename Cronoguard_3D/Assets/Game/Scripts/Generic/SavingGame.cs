@@ -7,12 +7,6 @@ using UnityEngine;
 
 public class SavingGame : MonoBehaviour
 {
-    // private void Start()
-    // {
-    //     DeleteGame("testFile");
-    //     SaveGame("testFile");
-    // }
-
     public List<string> GetSaveGames()
     {
         return Directory.GetFiles(Application.persistentDataPath)
@@ -61,6 +55,23 @@ public class SavingGame : MonoBehaviour
         Debug.Log("Game Saved");
     }
 
+    public void printValues()
+    {
+        UpgradeController upgradeController = GetComponent<UpgradeController>();
+        MoneyController moneyController = GetComponent<MoneyController>();
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        GameObject tower = GameObject.FindGameObjectWithTag("Base");
+        HealthController healthControllerPlayer = player.GetComponent<HealthController>();
+        HealthController healthControllerBase = tower.GetComponent<HealthController>();
+        foreach (var VARIABLE in upgradeController.getLevels())
+        {
+            Debug.Log(VARIABLE);
+        }
+        Debug.Log(moneyController.GetMoney());
+        Debug.Log(healthControllerPlayer.GetHealth());
+        Debug.Log(healthControllerBase.GetHealth());
+    }
+
     public void LoadGame(string name)
     {
         if (File.Exists(Application.persistentDataPath + "/" + name + ".save"))
@@ -77,24 +88,26 @@ public class SavingGame : MonoBehaviour
             HealthController healthControllerPlayer = player.GetComponent<HealthController>();
             HealthController healthControllerBase = tower.GetComponent<HealthController>();
 
-            moneyController.AddMoney(int.MaxValue);
+            moneyController.AddMoney(1000000);
             upgradeController.UpgradeBaseHp(save.levels[0]);
-            upgradeController.UpgradeTurret(0, save.levels[2]);
-            upgradeController.UpgradeTurret(1, save.levels[3]);
-            upgradeController.UpgradeTurret(2, save.levels[4]);
-            upgradeController.UpgradeTurret(3, save.levels[5]);
-            upgradeController.UpgradeAttack(save.levels[6]);
-            upgradeController.UpgradeHp(save.levels[7]);
+            upgradeController.UpgradeTurret(0, save.levels[1]);
+            upgradeController.UpgradeTurret(1, save.levels[2]);
+            upgradeController.UpgradeTurret(2, save.levels[3]);
+            upgradeController.UpgradeTurret(3, save.levels[4]);
+            upgradeController.UpgradeAttack(save.levels[5]);
+            upgradeController.UpgradeHp(save.levels[6]);
             moneyController.RemoveMoney(moneyController.GetMoney() - save.money);
             healthControllerPlayer.SetHealth(save.healthBase);
             healthControllerBase.SetHealth(save.healthPlayer);
+            
+            Debug.Log("loaded value: " + save.levels[0]);
         }
         else
         {
             Debug.Log("No game saved!");
         }
     }
-
+    
     public void DeleteGame(string name)
     {
         if (File.Exists(Application.persistentDataPath + "/" + name + ".save"))
