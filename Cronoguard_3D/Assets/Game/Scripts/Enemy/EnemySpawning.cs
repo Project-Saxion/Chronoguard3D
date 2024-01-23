@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 
 namespace Game.Scripts.Enemy
@@ -20,6 +21,8 @@ namespace Game.Scripts.Enemy
         public int currentWave = 1;
         private int enemiesLeft = 0;
         private SavingGame savingGame;
+
+        public UnityEvent enemiesSpawned;
         private void Update()
         {
             if (enemiesLeft == 0)
@@ -45,6 +48,8 @@ namespace Game.Scripts.Enemy
             int pointAmount = (int)Math.Floor((startPointAmount * (scalingPercentage * enemyTier)) + (setValueScaling * wave));
             Debug.Log(pointAmount);
             spawnEnemies(enemyTier, pointAmount);
+            
+            enemiesSpawned.Invoke();
 
             currentWave += 1;
         }
@@ -87,7 +92,7 @@ namespace Game.Scripts.Enemy
                     Vector3 spawnLocation = spawnLocations[temp];
                     GameObject spawnEnemy = Instantiate(enemies[i], spawnLocation, parentObject.transform.rotation, parentObject.transform);
                     enemiesLeft++;
-                    spawnEnemy.transform.GetChild(enemyTier).gameObject.SetActive(true);
+                    spawnEnemy.transform.GetChild(enemyTier - 1).gameObject.SetActive(true);
                     // spawnEnemy.GetComponent<HealthController>().SetHealth(healthEnemy);
                 }
             }
