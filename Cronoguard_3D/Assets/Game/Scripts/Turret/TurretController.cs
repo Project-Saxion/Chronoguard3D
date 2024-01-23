@@ -26,7 +26,6 @@ public class TurretController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        FindTargets();
         _shootingSystem = GetComponent<ShootingSystem>();
         _trackingSystem = GetComponent<TrackingSystem>();
     }
@@ -36,16 +35,23 @@ public class TurretController : MonoBehaviour
     {
         if (!target.IsUnityNull())
         {
-            _inRange = Vector3.Distance(transform.position, target.transform.position) < range;
-            if (_inRange)
+            if (allTargets.Contains(target))
             {
-                _trackingSystem.Rotate(target, rotationSpeed);
-                if (_canShoot && !_trackingSystem.rotating)
+                _inRange = Vector3.Distance(transform.position, target.transform.position) < range;
+                if (_inRange)
                 {
-                    _canShoot = false;
-                    // Wait till timer is done
-                    StartCoroutine(nameof(AllowToShoot));
-                    _shootingSystem.Attack(_tagsToDamage);
+                    _trackingSystem.Rotate(target, rotationSpeed);
+                    if (_canShoot && !_trackingSystem.rotating)
+                    {
+                        _canShoot = false;
+                        // Wait till timer is done
+                        StartCoroutine(nameof(AllowToShoot));
+                        _shootingSystem.Attack(_tagsToDamage);
+                    }
+                }
+                else
+                {
+                    target = FindNearestTarget();
                 }
             }
             else

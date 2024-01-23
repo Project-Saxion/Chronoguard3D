@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1669256893961313331}
   - component: {fileID: 2940249644802857700}
   - component: {fileID: 1476930557089912162}
+  - component: {fileID: -3964320242867357757}
   m_Layer: 0
   m_Name: HeavyEnemy
   m_TagString: Enemy
@@ -172,6 +173,29 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!136 &-3964320242867357757
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5701702961339348261}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 3.288783
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.1443915, z: 0}
 --- !u!1001 &1556606378978661545
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -186,7 +210,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1163287893404450, guid: 2d2ee0a29f7271b4ab7153373565a175, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4542119001986858, guid: 2d2ee0a29f7271b4ab7153373565a175, type: 3}
       propertyPath: m_LocalPosition.x
@@ -363,7 +387,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1923928492321678, guid: 53adac39f31adc641a66a1da0f1e47b5, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4520975720257318, guid: 53adac39f31adc641a66a1da0f1e47b5, type: 3}
       propertyPath: m_LocalScale.x
@@ -636,7 +660,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 192002, guid: bc4987e2fb189ec4d96488b047577016, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 441856, guid: bc4987e2fb189ec4d96488b047577016, type: 3}
       propertyPath: m_LocalScale.x
@@ -743,7 +767,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1125180930134808, guid: e890dffb44407254789568863177ad28, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4816355636270044, guid: e890dffb44407254789568863177ad28, type: 3}
       propertyPath: m_LocalScale.x
