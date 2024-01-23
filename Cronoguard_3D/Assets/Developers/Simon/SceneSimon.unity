@@ -650,12 +650,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 660074301279901549}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &1634546562 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 2124677645664123325, guid: c3dacb89bc7776342900c4dc46d76ba9,
-    type: 3}
-  m_PrefabInstance: {fileID: 660074301279901549}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1698683715
 GameObject:
   m_ObjectHideFlags: 0
@@ -713,35 +707,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 7082843024409319053, guid: c3dacb89bc7776342900c4dc46d76ba9,
-        type: 3}
-      propertyPath: animator
-      value: 
-      objectReference: {fileID: 1634546562}
-    - target: {fileID: 7082843024409319053, guid: c3dacb89bc7776342900c4dc46d76ba9,
-        type: 3}
-      propertyPath: attackCooldown
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 7567874404393297880, guid: c3dacb89bc7776342900c4dc46d76ba9,
         type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 7762733746640599891, guid: c3dacb89bc7776342900c4dc46d76ba9,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7762733746640599891, guid: c3dacb89bc7776342900c4dc46d76ba9,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7762733746640599891, guid: c3dacb89bc7776342900c4dc46d76ba9,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 7762733746640599891, guid: c3dacb89bc7776342900c4dc46d76ba9,
         type: 3}
@@ -792,21 +761,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7762733746640599891, guid: c3dacb89bc7776342900c4dc46d76ba9,
-        type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8256093712135341514, guid: c3dacb89bc7776342900c4dc46d76ba9,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8256093712135341514, guid: c3dacb89bc7776342900c4dc46d76ba9,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.55
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
