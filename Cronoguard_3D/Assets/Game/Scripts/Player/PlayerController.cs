@@ -56,7 +56,8 @@ public class PlayerController : MonoBehaviour
     public Attack[] attacking;
     public float attackModifier;
     public String[] tagsToDamage;
-    public ShootingSystem ShootingSystem;
+    public ShootingSystem shootingSystem;
+    private float shootingDamage;
     
     [SerializeField] public float moveSpeed;
     [SerializeField] public float acceleration;
@@ -89,7 +90,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-        attackModifier = attacking[0].GetModifier();
+        shootingDamage = shootingSystem.GetDamage();
     }
 
     private void FixedUpdate()
@@ -178,8 +179,10 @@ public class PlayerController : MonoBehaviour
             basicAttackEvent.Invoke();
             attackTime = 0;
             
+            attackModifier = attacking[0].GetModifier();
             attacking[0].SetModifier(attackModifier);
             attacking[1].SetModifier(attackModifier);
+            shootingSystem.SetDamage(Mathf.CeilToInt(shootingDamage * attackModifier));
             
             if (!isAttacking)
             {
@@ -195,7 +198,7 @@ public class PlayerController : MonoBehaviour
         if (shootTimer > shootCooldown)
         {
             animator.SetTrigger("isRangedAttacking");
-            ShootingSystem.Attack(tagsToDamage);
+            shootingSystem.Attack(tagsToDamage);
             shootTimer = 0;
         }
     }

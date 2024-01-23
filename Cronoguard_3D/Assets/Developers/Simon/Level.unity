@@ -3035,6 +3035,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 814297923}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &701916608 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3166777993929589903, guid: 338a24665ecc37f459cfa8344ee4799a,
+    type: 3}
+  m_PrefabInstance: {fileID: 814297923}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 701916607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af55dd02d5e2e30438e3073371712713, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &708770708
 GameObject:
   m_ObjectHideFlags: 0
@@ -3393,6 +3405,16 @@ PrefabInstance:
       propertyPath: animator
       value: 
       objectReference: {fileID: 1908993485}
+    - target: {fileID: 7082843024409319053, guid: 338a24665ecc37f459cfa8344ee4799a,
+        type: 3}
+      propertyPath: attackModifier
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7082843024409319053, guid: 338a24665ecc37f459cfa8344ee4799a,
+        type: 3}
+      propertyPath: shootingSystem
+      value: 
+      objectReference: {fileID: 701916608}
     - target: {fileID: 7260605433396968843, guid: 338a24665ecc37f459cfa8344ee4799a,
         type: 3}
       propertyPath: m_UseGravity
