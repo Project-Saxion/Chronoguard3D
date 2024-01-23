@@ -66,7 +66,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf42e27b0f9d5874e93ddfcacf674bcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitEnemies: []
   damage: 10
   modifier: 1
   weaponType: 2
@@ -136,7 +135,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf42e27b0f9d5874e93ddfcacf674bcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitEnemies: []
   damage: 2
   modifier: 1
   weaponType: 0
@@ -167,7 +165,7 @@ Transform:
   m_GameObject: {fileID: 7211673942252576109}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.34, y: 0, z: 0.35}
+  m_LocalPosition: {x: 0, y: 0, z: 0.55}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -206,8 +204,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2035598353972678193}
   - {fileID: 8256093712135341514}
@@ -269,11 +267,7 @@ MonoBehaviour:
     m_Bits: 8
   attackTime: 2
   attackDuration: 0.3
-  attackCooldown: 1
-  Aim: {fileID: 8256093712135341514}
-  bullet: {fileID: 7918862310071589297, guid: 834a72d0f8776304f9085554df6906a4, type: 3}
-  fireForce: 10
-  shootDuration: 0
+  attackCooldown: 0.5
   shootCooldown: 0.25
   shootTimer: 0.5
   heavyAttackTime: 10

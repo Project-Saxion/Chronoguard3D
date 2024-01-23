@@ -40,10 +40,6 @@ public class PlayerController : MonoBehaviour
     public float attackCooldown;
     
     // Ranged
-    public Transform Aim;
-    public GameObject bullet;
-    public float fireForce = 10;
-    public float shootDuration;
     public float shootCooldown = 0.25f;
     public float shootTimer = 0.5f;    
     
@@ -56,13 +52,10 @@ public class PlayerController : MonoBehaviour
     private Camera mainCam;
     
     [SerializeField] private LayerMask groundMask;
-
     
-    // Either make 3 different Attack items, or have a list that only get's 2/3rd of modifiers...
     public Attack[] attacking;
     public float attackModifier;
     public String[] tagsToDamage;
-
     public ShootingSystem ShootingSystem;
     
     [SerializeField] public float moveSpeed;
@@ -137,7 +130,6 @@ public class PlayerController : MonoBehaviour
 
     public void MovePlayer()
     {
-
         float targetSpeedHorizontal = moveDir.x * moveSpeed;
         float targetSpeedVertical = moveDir.z * moveSpeed;
         float speedDifX = targetSpeedHorizontal - rb.velocity.x;
@@ -150,8 +142,7 @@ public class PlayerController : MonoBehaviour
 
         movementVel.x = movementX * Vector3.right.x;
         movementVel.z = movementZ * Vector3.forward.z;
-
-
+        
         rb.AddForce(movementVel);
     }
 
@@ -160,16 +151,12 @@ public class PlayerController : MonoBehaviour
         float h = moveDir.z;
         float v = moveDir.x;
         moveDirection = new Vector3(h, 0, v);
-        
-        Vector3 mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 towardCursor = mousePos - transform.position;
 
         if (moveDirection.magnitude > 1.0f)
         {
             moveDirection = moveDirection.normalized;
         }
         moveDirection = transform.InverseTransformDirection(moveDirection);
-        
         
         if (rb.velocity.magnitude is < 0.1f and > -0.1f)
         {
@@ -208,12 +195,8 @@ public class PlayerController : MonoBehaviour
         if (shootTimer > shootCooldown)
         {
             animator.SetTrigger("isRangedAttacking");
-            
-            if (shootTimer > shootDuration)
-            {
-                shootTimer = 0;
-                ShootingSystem.Attack(tagsToDamage);
-            }
+            ShootingSystem.Attack(tagsToDamage);
+            shootTimer = 0;
         }
     }
 
@@ -268,7 +251,6 @@ public class PlayerController : MonoBehaviour
         {
             var direction = position - transform.position;
             direction.y = 0;
-
             transform.forward = direction;
         }
     }
