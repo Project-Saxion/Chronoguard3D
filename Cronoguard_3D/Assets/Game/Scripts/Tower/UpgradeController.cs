@@ -45,7 +45,13 @@ public class UpgradeController : MonoBehaviour
         0, // Turret t4
         0, // Player Attack lvl
         0, // Player HP lvl
-    }; 
+    };
+
+    [SerializeField] private List<GameObject> Base = new List<GameObject>()
+    {
+        
+    };
+    
     private List<(float, int)> turretData = new List<(float, int)>
     {
         (1, 6),
@@ -67,8 +73,11 @@ public class UpgradeController : MonoBehaviour
         (6.4, 2.8, 6.2),   // T1 WesternBase
         (6.4, 2.8, -5.8),  // T2 WesternBase
         (-6.2, 2.8, 6.2),  // T3 WesternBase
-        (-6.2, 2.8, -5.8)  // T4 WesternBase
-        
+        (-6.2, 2.8, -5.8), // T4 WesternBase
+        (2.7, 4.45, 2.7),  // T1 PirateBase 
+        (2.7, 4.45, -2.7), // T2 PirateBase
+        (-2.7, 4.45, 2.7), // T3 PirateBase
+        (-2.7, 4.45, -2.7),// T4 PirateBase
     };
     
     private MoneyController _moneyController;
@@ -87,8 +96,6 @@ public class UpgradeController : MonoBehaviour
     private GameObject player;
     private GameObject tower;
     private GameObject[] turretList;
-    
-    
     
     // Start is called before the first frame update
     void Start()
@@ -125,6 +132,7 @@ public class UpgradeController : MonoBehaviour
         {
             int newHealth = Mathf.CeilToInt((float)(baseStartHealth * Math.Pow(multipliers[0], level)));
             _baseHealthController.SetMaxHealth(newHealth); 
+            upgradeBaseGraphics(level);
             
             _moneyController.RemoveMoney(costs[0]);
             levels[0] = level;
@@ -209,6 +217,18 @@ public class UpgradeController : MonoBehaviour
     public List<int> getLevels()
     {
         return levels;
+    }
+
+    public void upgradeBaseGraphics(int level)
+    {
+        if (level < 7)
+        {
+          foreach (GameObject baseGameObject in Base)
+          {
+              baseGameObject.SetActive(false);
+          }
+          Base[level/2].SetActive(true);  
+        }
     }
 }
 
