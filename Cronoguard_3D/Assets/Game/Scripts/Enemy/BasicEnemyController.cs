@@ -37,6 +37,8 @@ public class BasicEnemyController : MonoBehaviour
     
     Vector3 closestSurfacePoint1;
     Vector3 closestSurfacePoint2;
+
+    private bool hasArrived = false;
     
     private void Start()
     {
@@ -46,6 +48,7 @@ public class BasicEnemyController : MonoBehaviour
         mainTarget = GameObject.FindGameObjectWithTag("Base");
         navMeshAgent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
+        enemySpawning = GameObject.Find("Managers").GetComponent<EnemySpawning>();
         
         _targetSize = _mainTargetSize;
 
@@ -124,15 +127,24 @@ public class BasicEnemyController : MonoBehaviour
 
     void StopOnAttackRange()
     {
-        if (/*Vector3.Distance(transform.position, _target.position)*/GetTrueDistance() < attackRange)
+        if ((navMeshAgent.pathStatus == NavMeshPathStatus.PathPartial && !navMeshAgent.hasPath) ||
+            ((Vector3.Distance(navMeshAgent.destination, navMeshAgent.transform.position) <= navMeshAgent.stoppingDistance) &&
+             (!navMeshAgent.hasPath || navMeshAgent.velocity.sqrMagnitude == 0f)))
         {
             SetFollowing(false);
             RotateToTarget();
             Attack();
+        } else if (Vector3.Distance(transform.position, navMeshAgent.destination)/*GetTrueDistance() */< attackRange)
+        {
+            SetFollowing(false);
+            RotateToTarget();
+            Attack();
+            //Debug.Log("1 - " + GetTrueDistance());
         }
         else if (!IsFollowing() && GetTrueDistance() > attackRange)
         {
             SetFollowing(true);
+            //Debug.Log("2 - " + GetTrueDistance());
         }
     }
 
@@ -174,8 +186,16 @@ public class BasicEnemyController : MonoBehaviour
     {
         if (other.gameObject == _target.gameObject)
         {
+            hasArrived = true;
+            SetFollowing(false);
+            RotateToTarget();
             Attack();
         }
+    }
+
+    private void OnCollisionExit(Collision other)
+    {
+        hasArrived = false;
     }
 
     public void DropMoney(int amount)

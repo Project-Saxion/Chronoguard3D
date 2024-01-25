@@ -27,7 +27,7 @@ public class UpgradeController : MonoBehaviour
     [SerializeField] private List<double> multipliers = new List<double>()
     {
         // Base multiplier
-        1.25,
+        1.75,
         // Turret Damage multiplier
         1.25,
         // Attack multiplier
@@ -45,7 +45,23 @@ public class UpgradeController : MonoBehaviour
         0, // Turret t4
         0, // Player Attack lvl
         0, // Player HP lvl
-    }; 
+    };
+
+    [SerializeField] private List<GameObject> Base = new List<GameObject>()
+    {
+        
+    };
+
+    [SerializeField] private List<GameObject> turretGraphics = new List<GameObject>()
+    {
+        
+    };
+
+    [SerializeField] private List<GameObject> ListOfTurrets = new List<GameObject>()
+    {
+
+    };
+    
     private List<(float, int)> turretData = new List<(float, int)>
     {
         (1, 6),
@@ -54,21 +70,24 @@ public class UpgradeController : MonoBehaviour
         (0.5f, 10)
     };
 
-    private List<(double, double, double)> turretTransformData = new List<(double, double, double)>
+    private List<(float, float, float)> turretTransformData = new List<(float, float, float)>
     {
-        (5, 7.38, 5.9),    // T1 SpaceBase
-        (5, 7.38, -5.5),   // T2 SpaceBase
-        (-5, 7.38, 5.9),   // T3 SpaceBase
-        (-5, 7.38, -5.5),  // T4 SpaceBase
-        (6, 5.08, 6.5),    // T1 WarBase
-        (6, 5.08, -6.1),   // T2 WarBase
-        (-6.6, 5.08, 6.5), // T3 WarBase
-        (-6.6, 5.08, -6.1),// T4 WarBase
-        (6.4, 2.8, 6.2),   // T1 WesternBase
-        (6.4, 2.8, -5.8),  // T2 WesternBase
-        (-6.2, 2.8, 6.2),  // T3 WesternBase
-        (-6.2, 2.8, -5.8)  // T4 WesternBase
-        
+        (2.7f, 4.45f, 2.7f),  // T1 PirateBase 
+        (2.7f, 4.45f, -2.7f), // T2 PirateBase
+        (-2.7f, 4.45f, 2.7f), // T3 PirateBase
+        (-2.7f, 4.45f, -2.7f),// T4 PirateBase
+        (6.4f, 2.8f, 6.2f),   // T1 WesternBase
+        (6.4f, 2.8f, -5.8f),  // T2 WesternBase
+        (-6.2f, 2.8f, 6.2f),  // T3 WesternBase
+        (-6.2f, 2.8f, -5.8f), // T4 WesternBase
+        (6f, 5.08f, 6.5f),    // T1 WarBase
+        (6f, 5.08f, -6.1f),   // T2 WarBase
+        (-6.6f, 5.08f, 6.5f), // T3 WarBase
+        (-6.6f, 5.08f, -6.1f),// T4 WarBase
+        (5f, 7.38f, 5.9f),    // T1 SpaceBase
+        (5f, 7.38f, -5.5f),   // T2 SpaceBase
+        (-5f, 7.38f, 5.9f),   // T3 SpaceBase
+        (-5f, 7.38f, -5.5f),  // T4 SpaceBase
     };
     
     private MoneyController _moneyController;
@@ -86,9 +105,7 @@ public class UpgradeController : MonoBehaviour
 
     private GameObject player;
     private GameObject tower;
-    private GameObject[] turretList;
-    
-    
+    // private GameObject[] turretList;
     
     // Start is called before the first frame update
     void Start()
@@ -105,11 +122,10 @@ public class UpgradeController : MonoBehaviour
         tower = GameObject.FindGameObjectWithTag("Base");
         _baseHealthController = tower.GetComponent<HealthController>();
         baseStartHealth = _baseHealthController.GetMaxHealth();
-
-        turretList = GameObject.FindGameObjectsWithTag("Turret");
-        for (int i = 0; i < turretList.Length; i++)
+        
+        for (int i = 0; i < ListOfTurrets.Count; i++)
         {
-            GameObject turret = turretList[i];
+            GameObject turret = ListOfTurrets[i];
             turret.SetActive(false);
         }
     }
@@ -121,13 +137,17 @@ public class UpgradeController : MonoBehaviour
 
     public void UpgradeBaseHp(int level)
     {
-        if (costs[0] <= _moneyController.GetMoney())
+        if (level < 4)
         {
-            int newHealth = Mathf.CeilToInt((float)(baseStartHealth * Math.Pow(multipliers[0], level)));
-            _baseHealthController.SetMaxHealth(newHealth); 
-            
-            _moneyController.RemoveMoney(costs[0]);
-            levels[0] = level;
+            if (costs[0] <= _moneyController.GetMoney())
+            { 
+                int newHealth = Mathf.CeilToInt((float)(baseStartHealth * Math.Pow(multipliers[0], level)));
+                _baseHealthController.SetMaxHealth(newHealth); 
+                upgradeBaseGraphics(level);
+                
+                _moneyController.RemoveMoney(costs[0]);
+                levels[0] = level;
+            }
         }
     }
 
@@ -142,16 +162,18 @@ public class UpgradeController : MonoBehaviour
         {
             if (costs[1] <= _moneyController.GetMoney())
             {
-                turretList[turretIndex].SetActive(true);
+                upgradeTurretGraphics(turretIndex, level);
+                ListOfTurrets[turretIndex].SetActive(true);
                 _moneyController.RemoveMoney(costs[1]);
                 levels[1 + turretIndex] = level;
             }
-        }else if (level > 1 && level <= 5)
+        }else if (level > 1 && level <= 4)
         {
             if (costs[2] <= _moneyController.GetMoney())
             {
-                turretList[turretIndex].GetComponent<TurretController>().SetFireRate(turretData[level - 2].Item1);
-                turretList[turretIndex].GetComponent<ShootingSystem>().SetDamage(turretData[level - 2].Item2);
+                upgradeTurretGraphics(turretIndex, level);
+                ListOfTurrets[turretIndex].GetComponent<TurretController>().SetFireRate(turretData[level - 2].Item1);
+                ListOfTurrets[turretIndex].GetComponent<ShootingSystem>().SetDamage(turretData[level - 2].Item2);
                 _moneyController.RemoveMoney(costs[2]);
                 levels[1 + turretIndex] = level;
             }
@@ -165,12 +187,15 @@ public class UpgradeController : MonoBehaviour
     
     public void UpgradeAttack(int level)
     {
-        if (costs[3] <= _moneyController.GetMoney())
+        if (level < 4)
         {
-            float newAttack = (float)(playerStartAttack * Math.Pow(multipliers[2], level));
-            _playerAttackController.attackModifier = newAttack;
-            _moneyController.RemoveMoney(costs[3]);
-            levels[5] = level;
+            if (costs[3] <= _moneyController.GetMoney())
+            {
+                float newAttack = (float)(playerStartAttack * Math.Pow(multipliers[2], level));
+                _playerAttackController.attackModifier = newAttack;
+                _moneyController.RemoveMoney(costs[3]);
+                levels[5] = level;
+            }
         }
     }
 
@@ -181,13 +206,16 @@ public class UpgradeController : MonoBehaviour
 
     public void UpgradeHp(int level)
     {
-        if (costs[4] <= _moneyController.GetMoney())
+        if (level < 4)
         {
-            int newHealth = Mathf.CeilToInt((float)(playerStartHealth * Math.Pow(multipliers[3], level)));
-            _playerHealthController.SetMaxHealth(newHealth); 
-            playerMaxHealth = Mathf.CeilToInt(newHealth); 
-            _moneyController.RemoveMoney(costs[4]);
-            levels[6] = level;
+           if (costs[4] <= _moneyController.GetMoney())
+           {
+               int newHealth = Mathf.CeilToInt((float)(playerStartHealth * Math.Pow(multipliers[3], level)));
+               _playerHealthController.SetMaxHealth(newHealth); 
+               playerMaxHealth = Mathf.CeilToInt(newHealth); 
+               _moneyController.RemoveMoney(costs[4]);
+               levels[6] = level;
+           } 
         }
     }
 
@@ -203,12 +231,38 @@ public class UpgradeController : MonoBehaviour
 
     public GameObject[] GetTurrets()
     {
-        return turretList;
+        return ListOfTurrets.ToArray();
     }
 
     public List<int> getLevels()
     {
         return levels;
+    }
+
+    public void upgradeBaseGraphics(int level)
+    {
+          foreach (GameObject baseGameObject in Base)
+          {
+              baseGameObject.SetActive(false);
+          }
+          Base[level].SetActive(true);
+          for (int i = 0; i < 4; i++)
+          {
+              ListOfTurrets[i].transform.localPosition = new Vector3(turretTransformData[level * 4 + i].Item1,turretTransformData[level * 4 + i].Item2, turretTransformData[level * 4 + i].Item3);
+          }
+
+    }
+
+    public void upgradeTurretGraphics(int turretIndex, int level)
+    {
+        if (level > 0 && level < 5)
+        {
+            if (level != 1)
+            {
+                turretGraphics[turretIndex*4 + level - 2].SetActive(false);
+            }
+            turretGraphics[(turretIndex*4) + level -1].SetActive(true);
+        }
     }
 }
 

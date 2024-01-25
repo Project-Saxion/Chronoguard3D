@@ -8,7 +8,9 @@ public class TrackingSystem : MonoBehaviour
     
     public void Rotate(GameObject target, float speed)
     {
-        Quaternion desiredRotation = Quaternion.LookRotation(target.transform.position - transform.position);
+        Vector3 position = target.transform.position;
+        Vector3 offset = new Vector3(0, 0.2f, 0);
+        Quaternion desiredRotation = Quaternion.LookRotation(position + offset - transform.position);
         if (transform.rotation != desiredRotation)
         {
             rotating = true;

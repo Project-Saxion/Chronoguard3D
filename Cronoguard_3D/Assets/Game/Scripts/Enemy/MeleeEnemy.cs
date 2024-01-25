@@ -26,9 +26,8 @@ public class MeleeEnemy : MonoBehaviour
         _targetHealthController = _target.GetComponent<HealthController>();
         if (_targetHealthController != null)
         {
-            //_targetHealthController.doDamage(attackDamage);
+            _targetHealthController.DoDamage(attackDamage);
         }
         Debug.Log("Attacked " + _target.gameObject.name);
-        //play animation
     }
 }
