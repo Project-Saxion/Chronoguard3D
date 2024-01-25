@@ -53,10 +53,8 @@ public class BasicEnemyController : MonoBehaviour
         _targetSize = _mainTargetSize;
 
         navMeshAgent.speed = movementSpeed;
-        navMeshAgent.destination = mainTarget.transform.position;
+        navMeshAgent.destination = RaycastToTarget(mainTarget.transform);
         _target = mainTarget.transform;
-
-        RaycastToTarget();
     }
 
     private void Update()
@@ -79,7 +77,7 @@ public class BasicEnemyController : MonoBehaviour
         _target = newTarget;
         if (IsFollowing())
         {
-            navMeshAgent.destination = _target.transform.position;
+            navMeshAgent.destination = RaycastToTarget(_target);
         }
     }
 
@@ -92,7 +90,7 @@ public class BasicEnemyController : MonoBehaviour
     {
         if (shouldFollow)
         {
-            navMeshAgent.destination = _target.position;
+            navMeshAgent.destination = RaycastToTarget(_target);
         }
         else
         {
@@ -122,7 +120,6 @@ public class BasicEnemyController : MonoBehaviour
             {
                 SetTarget(mainTarget.transform);
                 _targetSize = _mainTargetSize;
-                RaycastToTarget();
             }
         }
     }
@@ -226,17 +223,25 @@ public class BasicEnemyController : MonoBehaviour
         return surfaceDistance;
     }
 
-    void RaycastToTarget()
+    Vector3 RaycastToTarget(Transform target)
     {
+        int layer = 10;
+ 
+        int layerMask = 1 << layer;
+        
         RaycastHit hit;
 
-        Vector3 targetDirection = _target.position - transform.position;
+        Vector3 targetDirection = target.position - transform.position;
 
         
-        if (Physics.Raycast(transform.position, targetDirection, out hit, Mathf.Infinity, 10))
+        if (Physics.Raycast(transform.position, targetDirection, out hit, Mathf.Infinity, layerMask))
         {
-            SetTarget(hit.transform);
+            Debug.Log(hit.transform.gameObject);
+            return hit.point;
         }
+        Debug.DrawRay(transform.position, targetDirection, Color.red, Mathf.Infinity);
+        
+        return Vector3.zero;
     }
     
 
