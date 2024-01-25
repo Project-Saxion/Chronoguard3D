@@ -9,5 +9,6 @@ namespace Game.Scripts.Generic
         public int money;
         public int healthPlayer;
         public int healthBase;
+        public int wave;
     }
 }
