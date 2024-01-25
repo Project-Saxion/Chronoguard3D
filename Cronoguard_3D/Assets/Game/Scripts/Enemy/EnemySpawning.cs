@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 
 namespace Game.Scripts.Enemy
@@ -20,13 +21,20 @@ namespace Game.Scripts.Enemy
         public int currentWave = 1;
         private int enemiesLeft = 0;
         private SavingGame savingGame;
+
+        public UnityEvent enemiesSpawned;
+
+        private bool hasLoaded = false;
         private void Update()
         {
             if (enemiesLeft == 0)
             {
+
+                
                 spawnWave(currentWave);
-                savingGame.DeleteGame("save");
-                savingGame.SaveGame("save");
+                
+                savingGame.DeleteGame(savingGame.currentSave);
+                savingGame.SaveGame(savingGame.currentSave);
             }
         }
         
@@ -45,6 +53,8 @@ namespace Game.Scripts.Enemy
             int pointAmount = (int)Math.Floor((startPointAmount * (scalingPercentage * enemyTier)) + (setValueScaling * wave));
             Debug.Log(pointAmount);
             spawnEnemies(enemyTier, pointAmount);
+            
+            enemiesSpawned.Invoke();
 
             currentWave += 1;
         }
@@ -69,8 +79,15 @@ namespace Game.Scripts.Enemy
                 spawnLocations[i] = new Vector3(x, enemySpawnHeight, z);
             }
 
-            savingGame = GetComponent<SavingGame>();
+            savingGame = GameObject.FindGameObjectWithTag("DontDestroy").GetComponent<SavingGame>();
             enemyScaling = GetComponent<EnemyScaling>();
+            
+            if (savingGame.TryGetSave(savingGame.currentSave))
+            {
+                Debug.Log("trying to load save");
+                savingGame.LoadGame(savingGame.currentSave);
+            }
+            
             // spawnWave(currentWave);
         }
         
@@ -87,7 +104,7 @@ namespace Game.Scripts.Enemy
                     Vector3 spawnLocation = spawnLocations[temp];
                     GameObject spawnEnemy = Instantiate(enemies[i], spawnLocation, parentObject.transform.rotation, parentObject.transform);
                     enemiesLeft++;
-                    spawnEnemy.transform.GetChild(enemyTier).gameObject.SetActive(true);
+                    spawnEnemy.transform.GetChild(enemyTier - 1).gameObject.SetActive(true);
                     // spawnEnemy.GetComponent<HealthController>().SetHealth(healthEnemy);
                 }
             }

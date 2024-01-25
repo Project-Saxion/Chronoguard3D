@@ -9,6 +9,8 @@ TagManager:
   - Bullet
   - Turret
   - Collide
+  - DontDestroy
+  - Manager
   layers:
   - Default
   - TransparentFX
@@ -20,7 +22,7 @@ TagManager:
   - 
   - TempCast
   - Walkable
-  - 
+  - Not Walkable
   - 
   - 
   - 

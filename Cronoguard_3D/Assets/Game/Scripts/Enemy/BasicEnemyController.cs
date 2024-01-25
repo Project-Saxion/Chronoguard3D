@@ -14,9 +14,11 @@ public class BasicEnemyController : MonoBehaviour
 
     public GameObject player;
     public GameObject mainTarget;
+    public Animator[] characterAnimators;
     public EnemySpawning enemySpawning;
     
     private NavMeshAgent navMeshAgent;
+    private Rigidbody rb;
     
     //values
     private Transform _target;
@@ -33,6 +35,11 @@ public class BasicEnemyController : MonoBehaviour
     private float _playerSize;
     private float _targetSize;
     
+    Vector3 closestSurfacePoint1;
+    Vector3 closestSurfacePoint2;
+
+    private bool hasArrived = false;
+    
     private void Start()
     {
         _attackTime = Time.time;
@@ -40,19 +47,29 @@ public class BasicEnemyController : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         mainTarget = GameObject.FindGameObjectWithTag("Base");
         navMeshAgent = GetComponent<NavMeshAgent>();
+        rb = GetComponent<Rigidbody>();
+        enemySpawning = GameObject.Find("Managers").GetComponent<EnemySpawning>();
         
         _targetSize = _mainTargetSize;
 
         navMeshAgent.speed = movementSpeed;
-        navMeshAgent.destination = mainTarget.transform.position;
+        navMeshAgent.destination = RaycastToTarget(mainTarget.transform);
         _target = mainTarget.transform;
-
     }
 
     private void Update()
     {
         ChangeTargetOnRange();
         StopOnAttackRange();
+        UpdateAnimations();
+    }
+
+    void UpdateAnimations()
+    {
+        foreach (Animator animator in characterAnimators)
+        {
+            animator.SetFloat("Velocity", navMeshAgent.velocity.magnitude);
+        }
     }
 
     public void SetTarget(Transform newTarget)
@@ -60,7 +77,7 @@ public class BasicEnemyController : MonoBehaviour
         _target = newTarget;
         if (IsFollowing())
         {
-            navMeshAgent.destination = _target.transform.position;
+            navMeshAgent.destination = RaycastToTarget(_target);
         }
     }
 
@@ -73,7 +90,7 @@ public class BasicEnemyController : MonoBehaviour
     {
         if (shouldFollow)
         {
-            navMeshAgent.destination = _target.position;
+            navMeshAgent.destination = RaycastToTarget(_target);
         }
         else
         {
@@ -109,15 +126,24 @@ public class BasicEnemyController : MonoBehaviour
 
     void StopOnAttackRange()
     {
-        if (Vector3.Distance(transform.position, _target.position) < attackRange)
+        if ((navMeshAgent.pathStatus == NavMeshPathStatus.PathPartial && !navMeshAgent.hasPath) ||
+            ((Vector3.Distance(navMeshAgent.destination, navMeshAgent.transform.position) <= navMeshAgent.stoppingDistance) &&
+             (!navMeshAgent.hasPath || navMeshAgent.velocity.sqrMagnitude == 0f)))
         {
             SetFollowing(false);
             RotateToTarget();
             Attack();
+        } else if (Vector3.Distance(transform.position, navMeshAgent.destination)/*GetTrueDistance() */< attackRange)
+        {
+            SetFollowing(false);
+            RotateToTarget();
+            Attack();
+            //Debug.Log("1 - " + GetTrueDistance());
         }
-        else if (!IsFollowing())
+        else if (!IsFollowing() && GetTrueDistance() > attackRange)
         {
             SetFollowing(true);
+            //Debug.Log("2 - " + GetTrueDistance());
         }
     }
 
@@ -127,6 +153,12 @@ public class BasicEnemyController : MonoBehaviour
         {
             onAttack.Invoke();
             _attackTime = Time.time;
+
+            foreach (Animator animator in characterAnimators)
+            {
+                animator.ResetTrigger("Attack");
+                animator.SetTrigger("Attack");
+            }
         }
     }
 
@@ -139,16 +171,30 @@ public class BasicEnemyController : MonoBehaviour
             turretController.RemoveTargetFromList(gameObject);
         }
 
+        foreach (Animator animator in characterAnimators)
+        {
+            animator.SetTrigger("Death");
+        }
+
+        SetTarget(transform);
         enemySpawning.DestroyEnemy();
-        Destroy(gameObject);
+//        Destroy(gameObject);
     }
     
     private void OnCollisionStay2D(Collision2D other)
     {
         if (other.gameObject == _target.gameObject)
         {
+            hasArrived = true;
+            SetFollowing(false);
+            RotateToTarget();
             Attack();
         }
+    }
+
+    private void OnCollisionExit(Collision other)
+    {
+        hasArrived = false;
     }
 
     public void DropMoney(int amount)
@@ -163,4 +209,40 @@ public class BasicEnemyController : MonoBehaviour
         Quaternion rotation = Quaternion.LookRotation(lookPos);
         transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 10);
     }
+
+    float GetTrueDistance()
+    {
+        // the surface point of this collider that is closer to the position of the other collider
+        closestSurfacePoint1 = GetComponentInChildren<Collider>().ClosestPointOnBounds(_target.transform.position);
+       
+        // the surface point of the other collider that is closer to the position of this collider
+        closestSurfacePoint2 = _target.GetComponentInChildren<Collider>().ClosestPointOnBounds(transform.position);
+       
+        // the distance between the surfaces of the 2 colliders
+        float surfaceDistance = Vector3.Distance(closestSurfacePoint1, closestSurfacePoint2);
+        return surfaceDistance;
+    }
+
+    Vector3 RaycastToTarget(Transform target)
+    {
+        int layer = 10;
+ 
+        int layerMask = 1 << layer;
+        
+        RaycastHit hit;
+
+        Vector3 targetDirection = target.position - transform.position;
+
+        
+        if (Physics.Raycast(transform.position, targetDirection, out hit, Mathf.Infinity, layerMask))
+        {
+            Debug.Log(hit.transform.gameObject);
+            return hit.point;
+        }
+        Debug.DrawRay(transform.position, targetDirection, Color.red, Mathf.Infinity);
+        
+        return Vector3.zero;
+    }
+    
+
 }

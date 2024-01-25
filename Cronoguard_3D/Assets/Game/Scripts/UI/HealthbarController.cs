@@ -32,19 +32,4 @@ public class HealthbarController : MonoBehaviour
         healthbarText.text = health + "/" + fullHealth;
 
     }
-
-    public void loadGame()
-    {
-        
-    }
-
-    public void newGame()
-    {
-        
-    }
-
-    public void exit()
-    {
-        Application.Quit();
-    }
 }
