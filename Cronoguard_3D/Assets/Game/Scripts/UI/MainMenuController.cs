@@ -22,7 +22,7 @@ public class MainMenuController : MonoBehaviour
         SceneManager.LoadScene(1);
     }    
 
-    public void exit()
+    public void Exit()
     {
         Application.Quit();
     }
@@ -31,7 +31,7 @@ public class MainMenuController : MonoBehaviour
     {
         for (int i = 0; i < 3; i++)
         {
-            if (TryGetSave("slot" + (i+1)))
+            if (savingManager.TryGetSave("slot" + (i+1)))
             {
                 slotText[i].text = "Load save " + (i + 1);
             }
@@ -40,16 +40,5 @@ public class MainMenuController : MonoBehaviour
                 slotText[i].text = "Start New Game";
             }
         }
-    }
-
-
-    bool TryGetSave(string save)
-    {
-        if (File.Exists(Application.persistentDataPath + "/" + save + ".save"))
-        {
-            return true;
-        }
-
-        return false;
     }
 }

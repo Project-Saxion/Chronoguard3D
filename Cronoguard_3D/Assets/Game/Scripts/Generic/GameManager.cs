@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
     {
         player.SetActive(false);
         gameUI.SetActive(false);
-        gameOverUI.SetActive(false);
+        gameOverUI.SetActive(true);
     }
     
     public void RestartGame()
@@ -81,6 +81,12 @@ public class GameManager : MonoBehaviour
     {
         //save game
         SceneManager.LoadScene(0);
+    }
+
+    public void DeleteSave()
+    {
+        SavingGame savingGame = GameObject.FindGameObjectWithTag("DontDestroy").GetComponent<SavingGame>();
+        savingGame.DeleteGame(savingGame.currentSave);
     }
     
 }

@@ -126,4 +126,14 @@ public class SavingGame : MonoBehaviour
             Debug.Log("No game saved!");
         }
     }
+    
+    public bool TryGetSave(string save)
+    {
+        if (File.Exists(Application.persistentDataPath + "/" + save + ".save"))
+        {
+            return true;
+        }
+
+        return false;
+    }
 }

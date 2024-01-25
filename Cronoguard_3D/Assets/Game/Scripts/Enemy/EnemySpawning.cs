@@ -23,11 +23,16 @@ namespace Game.Scripts.Enemy
         private SavingGame savingGame;
 
         public UnityEvent enemiesSpawned;
+
+        private bool hasLoaded = false;
         private void Update()
         {
             if (enemiesLeft == 0)
             {
+
+                
                 spawnWave(currentWave);
+                
                 savingGame.DeleteGame(savingGame.currentSave);
                 savingGame.SaveGame(savingGame.currentSave);
             }
@@ -76,6 +81,13 @@ namespace Game.Scripts.Enemy
 
             savingGame = GameObject.FindGameObjectWithTag("DontDestroy").GetComponent<SavingGame>();
             enemyScaling = GetComponent<EnemyScaling>();
+            
+            if (savingGame.TryGetSave(savingGame.currentSave))
+            {
+                Debug.Log("trying to load save");
+                savingGame.LoadGame(savingGame.currentSave);
+            }
+            
             // spawnWave(currentWave);
         }
         
