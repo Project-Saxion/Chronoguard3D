@@ -529,6 +529,64 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 300532015}
   m_CullTransparentMesh: 1
+--- !u!1 &435590499
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 435590502}
+  - component: {fileID: 435590501}
+  - component: {fileID: 435590500}
+  m_Layer: 0
+  m_Name: SaveGame
+  m_TagString: DontDestroy
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &435590500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 435590499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d6c9a60f183228489cf8e59c918c289, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &435590501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 435590499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3e0ab273421c4d4a9f431a5004a3cdb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentSave: save
+--- !u!4 &435590502
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 435590499}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 423.47995, y: 10.352349, z: 469.73877}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &497336821
 GameObject:
   m_ObjectHideFlags: 0
@@ -1260,7 +1318,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1145100997}
   - component: {fileID: 1145100998}
-  - component: {fileID: 1145100999}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1295,19 +1352,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 379bac16db49a904fb1c371f49007148, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1145100999
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1145100995}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3e0ab273421c4d4a9f431a5004a3cdb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentSave: save
+  savingManager: {fileID: 435590501}
 --- !u!1 &1198001748
 GameObject:
   m_ObjectHideFlags: 0
@@ -1738,13 +1783,13 @@ MonoBehaviour:
       - m_Target: {fileID: 1145100998}
         m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
         m_MethodName: StartGame
-        m_Mode: 1
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: slot1
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1396710440
@@ -1871,13 +1916,13 @@ MonoBehaviour:
       - m_Target: {fileID: 1145100998}
         m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
         m_MethodName: StartGame
-        m_Mode: 1
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: slot3
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1495399229
@@ -2224,13 +2269,13 @@ MonoBehaviour:
       - m_Target: {fileID: 1145100998}
         m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
         m_MethodName: StartGame
-        m_Mode: 1
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: slot2
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1968296029
@@ -2416,3 +2461,4 @@ SceneRoots:
   - {fileID: 867634675}
   - {fileID: 1114424834}
   - {fileID: 1145100997}
+  - {fileID: 435590502}

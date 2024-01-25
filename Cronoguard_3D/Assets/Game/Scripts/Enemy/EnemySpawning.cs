@@ -28,8 +28,8 @@ namespace Game.Scripts.Enemy
             if (enemiesLeft == 0)
             {
                 spawnWave(currentWave);
-                savingGame.DeleteGame("save");
-                savingGame.SaveGame("save");
+                savingGame.DeleteGame(savingGame.currentSave);
+                savingGame.SaveGame(savingGame.currentSave);
             }
         }
         
@@ -74,7 +74,7 @@ namespace Game.Scripts.Enemy
                 spawnLocations[i] = new Vector3(x, enemySpawnHeight, z);
             }
 
-            savingGame = GetComponent<SavingGame>();
+            savingGame = GameObject.FindGameObjectWithTag("DontDestroy").GetComponent<SavingGame>();
             enemyScaling = GetComponent<EnemyScaling>();
             // spawnWave(currentWave);
         }

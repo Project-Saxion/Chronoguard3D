@@ -35,13 +35,13 @@ public class SavingGame : MonoBehaviour
         }
         Save save = new Save();
 
-        UpgradeController upgradeController = GetComponent<UpgradeController>();
-        MoneyController moneyController = GetComponent<MoneyController>();
+        UpgradeController upgradeController = GameObject.FindGameObjectWithTag("Manager").GetComponent<UpgradeController>();
+        MoneyController moneyController = GameObject.FindGameObjectWithTag("Manager").GetComponent<MoneyController>();
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         GameObject tower = GameObject.FindGameObjectWithTag("Base");
         HealthController healthControllerPlayer = player.GetComponent<HealthController>();
         HealthController healthControllerBase = tower.GetComponent<HealthController>();
-        EnemySpawning enemySpawning = GetComponent<EnemySpawning>();
+        EnemySpawning enemySpawning = GameObject.FindGameObjectWithTag("Manager").GetComponent<EnemySpawning>();
         save.levels = upgradeController.getLevels();
         save.money = moneyController.GetMoney();
         save.healthPlayer = healthControllerPlayer.GetHealth();
@@ -60,8 +60,8 @@ public class SavingGame : MonoBehaviour
 
     public void printValues()
     {
-        UpgradeController upgradeController = GetComponent<UpgradeController>();
-        MoneyController moneyController = GetComponent<MoneyController>();
+        UpgradeController upgradeController = GameObject.FindGameObjectWithTag("Manager").GetComponent<UpgradeController>();
+        MoneyController moneyController = GameObject.FindGameObjectWithTag("Manager").GetComponent<MoneyController>();
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         GameObject tower = GameObject.FindGameObjectWithTag("Base");
         HealthController healthControllerPlayer = player.GetComponent<HealthController>();
@@ -84,13 +84,13 @@ public class SavingGame : MonoBehaviour
             Save save = (Save)bf.Deserialize(file);
             file.Close();
             
-            UpgradeController upgradeController = GetComponent<UpgradeController>();
-            MoneyController moneyController = GetComponent<MoneyController>();
+            UpgradeController upgradeController = GameObject.FindGameObjectWithTag("Manager").GetComponent<UpgradeController>();
+            MoneyController moneyController = GameObject.FindGameObjectWithTag("Manager").GetComponent<MoneyController>();
             GameObject player = GameObject.FindGameObjectWithTag("Player");
             GameObject tower = GameObject.FindGameObjectWithTag("Base");
             HealthController healthControllerPlayer = player.GetComponent<HealthController>();
             HealthController healthControllerBase = tower.GetComponent<HealthController>();
-            EnemySpawning enemySpawning = GetComponent<EnemySpawning>();
+            EnemySpawning enemySpawning = GameObject.FindGameObjectWithTag("Manager").GetComponent<EnemySpawning>();
             
             moneyController.AddMoney(1000000);
             upgradeController.UpgradeBaseHp(save.levels[0]);

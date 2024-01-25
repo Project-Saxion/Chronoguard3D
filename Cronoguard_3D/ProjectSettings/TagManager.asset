@@ -9,6 +9,8 @@ TagManager:
   - Bullet
   - Turret
   - Collide
+  - DontDestroy
+  - Manager
   layers:
   - Default
   - TransparentFX

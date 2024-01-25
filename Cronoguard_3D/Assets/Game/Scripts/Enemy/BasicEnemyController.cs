@@ -56,6 +56,7 @@ public class BasicEnemyController : MonoBehaviour
         navMeshAgent.destination = mainTarget.transform.position;
         _target = mainTarget.transform;
 
+        RaycastToTarget();
     }
 
     private void Update()
@@ -121,6 +122,7 @@ public class BasicEnemyController : MonoBehaviour
             {
                 SetTarget(mainTarget.transform);
                 _targetSize = _mainTargetSize;
+                RaycastToTarget();
             }
         }
     }
@@ -222,6 +224,19 @@ public class BasicEnemyController : MonoBehaviour
         // the distance between the surfaces of the 2 colliders
         float surfaceDistance = Vector3.Distance(closestSurfacePoint1, closestSurfacePoint2);
         return surfaceDistance;
+    }
+
+    void RaycastToTarget()
+    {
+        RaycastHit hit;
+
+        Vector3 targetDirection = _target.position - transform.position;
+
+        
+        if (Physics.Raycast(transform.position, targetDirection, out hit, Mathf.Infinity, 10))
+        {
+            SetTarget(hit.transform);
+        }
     }
     
 
