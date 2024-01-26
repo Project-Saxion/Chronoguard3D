@@ -50,7 +50,7 @@ namespace Game.Scripts.Enemy
                 enemyTier = 4;
             }
 
-            int pointAmount = (int)Math.Floor((startPointAmount * (scalingPercentage * enemyTier)) + (setValueScaling * wave));
+            int pointAmount = (int)Math.Floor(((startPointAmount) + (setValueScaling * wave)) * (scalingPercentage * enemyTier));
             Debug.Log(pointAmount);
             spawnEnemies(enemyTier, pointAmount);
             
@@ -87,13 +87,25 @@ namespace Game.Scripts.Enemy
                 Debug.Log("trying to load save");
                 savingGame.LoadGame(savingGame.currentSave);
             }
-            
-            // spawnWave(currentWave);
         }
         
         private void spawnEnemies(int enemyTier, int pointAmount)
         {
             ulong enemyCount = enemyScaling.getEnemies(enemyTier, pointAmount);
+
+            if (enemyTier == 1)
+            {
+                healthEnemy = 3;
+            } else if (enemyTier == 2)
+            {
+                healthEnemy = 4;
+            } else if (enemyTier == 3)
+            {
+                healthEnemy = 5;
+            } else if (enemyTier == 4)
+            {
+                healthEnemy = 6;
+            }
             
             for (int i = 0; i < 3; i++)
             {
@@ -105,7 +117,15 @@ namespace Game.Scripts.Enemy
                     GameObject spawnEnemy = Instantiate(enemies[i], spawnLocation, parentObject.transform.rotation, parentObject.transform);
                     enemiesLeft++;
                     spawnEnemy.transform.GetChild(enemyTier - 1).gameObject.SetActive(true);
-                    // spawnEnemy.GetComponent<HealthController>().SetHealth(healthEnemy);
+                    if (i == 0)
+                    {
+                        spawnEnemy.GetComponent<HealthController>().SetHealth(healthEnemy * 2);
+                    } else if (i == 1)
+                    {
+                        spawnEnemy.GetComponent<HealthController>().SetHealth(healthEnemy * 3);
+                    } else {
+                        spawnEnemy.GetComponent<HealthController>().SetHealth(healthEnemy * 1);
+                    }
                 }
             }
         }

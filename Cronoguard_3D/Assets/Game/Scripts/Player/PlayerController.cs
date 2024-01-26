@@ -163,10 +163,15 @@ public class PlayerController : MonoBehaviour
         if (rb.velocity.magnitude is < 0.1f and > -0.1f)
         {
             animator.SetBool("isIdle", true);
+            audioSources[3].Stop();
         }
         else
         {
             animator.SetBool("isIdle", false);
+            if (!audioSources[3].isPlaying)
+            {
+                audioSources[3].Play();
+            }
         }
         
         animator.SetFloat("Vertical", moveDirection.z);
