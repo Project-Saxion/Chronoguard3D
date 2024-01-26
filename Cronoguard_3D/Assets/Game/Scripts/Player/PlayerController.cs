@@ -71,7 +71,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public float velPower;
 
     private Vector3 moveDirection;
-    public Animator animator; 
+    public Animator animator;
+    [SerializeField] public List<AudioSource> audioSources;
 
     private void Awake()
     {
@@ -199,6 +200,7 @@ public class PlayerController : MonoBehaviour
                 SwordHitBox.SetActive(true);
                 isAttacking = true;
                 animator.SetTrigger("isAttacking");
+                audioSources[0].Play();
             }
         }
     }
@@ -213,6 +215,7 @@ public class PlayerController : MonoBehaviour
             {
                 shootTimer = 0;
                 ShootingSystem.Attack(tagsToDamage);
+                audioSources[1].Play();
             }
         }
     }
@@ -228,6 +231,7 @@ public class PlayerController : MonoBehaviour
                 animator.SetTrigger("isHeavyAttacking");
                 HeavyAttack.SetActive(true);
                 heavyIsAttacking = true;
+                audioSources[3].Play();
             }
         }
     }
