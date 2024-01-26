@@ -234,9 +234,9 @@ public class PlayerController : MonoBehaviour
             if (!heavyIsAttacking)
             {
                 animator.SetTrigger("isHeavyAttacking");
+                audioSources[4].Play();
                 HeavyAttack.SetActive(true);
                 heavyIsAttacking = true;
-                audioSources[3].Play();
             }
         }
     }

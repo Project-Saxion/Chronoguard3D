@@ -34,6 +34,8 @@ public class BasicEnemyController : MonoBehaviour
     private float _mainTargetSize;
     private float _playerSize;
     private float _targetSize;
+
+    public int moneyDropAmount;
     
     Vector3 closestSurfacePoint1;
     Vector3 closestSurfacePoint2;
@@ -178,6 +180,8 @@ public class BasicEnemyController : MonoBehaviour
 
         SetTarget(transform);
         enemySpawning.DestroyEnemy();
+
+        MoneyController.Instance.AddMoney(moneyDropAmount);
 //        Destroy(gameObject);
     }
     
