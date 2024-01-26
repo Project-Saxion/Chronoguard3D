@@ -16,7 +16,7 @@ public class TurretController : MonoBehaviour
     private List<GameObject> allTargets = new List<GameObject>();
 
     private ShootingSystem _shootingSystem;
-
+    private AudioSource audioSource;
     private TrackingSystem _trackingSystem;
     private string[] _tagsToDamage = new[] { "Enemy" };
 
@@ -28,6 +28,7 @@ public class TurretController : MonoBehaviour
     {
         _shootingSystem = GetComponent<ShootingSystem>();
         _trackingSystem = GetComponent<TrackingSystem>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -47,6 +48,7 @@ public class TurretController : MonoBehaviour
                         // Wait till timer is done
                         StartCoroutine(nameof(AllowToShoot));
                         _shootingSystem.Attack(_tagsToDamage);
+                        audioSource.Play();
                     }
                 }
                 else
