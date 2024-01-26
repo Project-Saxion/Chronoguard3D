@@ -11,16 +11,18 @@ public class RangedEnemy : MonoBehaviour
     
     //references and stuff
     private ShootingSystem shootingSystem;
-
+    private AudioSource audioSource;
     
     private void Start()
     {
         shootingSystem = GetComponent<ShootingSystem>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void Attack()
     {
         shootingSystem.Attack(tagsToDamage);
+        audioSource.Play();
     }
 
 }
