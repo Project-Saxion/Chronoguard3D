@@ -12,18 +12,21 @@ public class MeleeEnemy : MonoBehaviour
     private BasicEnemyController _basicEnemyController;
     private GameObject _target;
     private HealthController _targetHealthController;
+    private AudioSource audioSource;
     
     
     
     private void Start()
     {
         _basicEnemyController = GetComponent<BasicEnemyController>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void MeleeAttack()
     {
         _target = _basicEnemyController.GetTarget().gameObject;
         _targetHealthController = _target.GetComponent<HealthController>();
+        audioSource.Play();
         if (_targetHealthController != null)
         {
             _targetHealthController.DoDamage(attackDamage);
