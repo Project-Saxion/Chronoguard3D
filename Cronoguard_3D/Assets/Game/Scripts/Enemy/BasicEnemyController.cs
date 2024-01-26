@@ -37,6 +37,8 @@ public class BasicEnemyController : MonoBehaviour
     
     Vector3 closestSurfacePoint1;
     Vector3 closestSurfacePoint2;
+
+    private bool hasArrived = false;
     
     private void Start()
     {
@@ -46,13 +48,13 @@ public class BasicEnemyController : MonoBehaviour
         mainTarget = GameObject.FindGameObjectWithTag("Base");
         navMeshAgent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
+        enemySpawning = GameObject.Find("Managers").GetComponent<EnemySpawning>();
         
         _targetSize = _mainTargetSize;
 
         navMeshAgent.speed = movementSpeed;
-        navMeshAgent.destination = mainTarget.transform.position;
+        navMeshAgent.destination = RaycastToTarget(mainTarget.transform);
         _target = mainTarget.transform;
-
     }
 
     private void Update()
@@ -75,7 +77,7 @@ public class BasicEnemyController : MonoBehaviour
         _target = newTarget;
         if (IsFollowing())
         {
-            navMeshAgent.destination = _target.transform.position;
+            navMeshAgent.destination = RaycastToTarget(_target);
         }
     }
 
@@ -88,7 +90,7 @@ public class BasicEnemyController : MonoBehaviour
     {
         if (shouldFollow)
         {
-            navMeshAgent.destination = _target.position;
+            navMeshAgent.destination = RaycastToTarget(_target);
         }
         else
         {
@@ -124,19 +126,24 @@ public class BasicEnemyController : MonoBehaviour
 
     void StopOnAttackRange()
     {
-        if (/*Vector3.Distance(transform.position, _target.position)*/GetTrueDistance() < attackRange)
+        if ((navMeshAgent.pathStatus == NavMeshPathStatus.PathPartial && !navMeshAgent.hasPath) ||
+            ((Vector3.Distance(navMeshAgent.destination, navMeshAgent.transform.position) <= navMeshAgent.stoppingDistance) &&
+             (!navMeshAgent.hasPath || navMeshAgent.velocity.sqrMagnitude == 0f)))
         {
             SetFollowing(false);
             RotateToTarget();
             Attack();
-            Debug.Log("test1");
-            Debug.Log("1 - " + GetTrueDistance());
+        } else if (Vector3.Distance(transform.position, navMeshAgent.destination)/*GetTrueDistance() */< attackRange)
+        {
+            SetFollowing(false);
+            RotateToTarget();
+            Attack();
+            //Debug.Log("1 - " + GetTrueDistance());
         }
         else if (!IsFollowing() && GetTrueDistance() > attackRange)
         {
             SetFollowing(true);
-            Debug.Log("test2");
-            Debug.Log("2 - " + GetTrueDistance());
+            //Debug.Log("2 - " + GetTrueDistance());
         }
     }
 
@@ -178,8 +185,16 @@ public class BasicEnemyController : MonoBehaviour
     {
         if (other.gameObject == _target.gameObject)
         {
+            hasArrived = true;
+            SetFollowing(false);
+            RotateToTarget();
             Attack();
         }
+    }
+
+    private void OnCollisionExit(Collision other)
+    {
+        hasArrived = false;
     }
 
     public void DropMoney(int amount)
@@ -206,6 +221,27 @@ public class BasicEnemyController : MonoBehaviour
         // the distance between the surfaces of the 2 colliders
         float surfaceDistance = Vector3.Distance(closestSurfacePoint1, closestSurfacePoint2);
         return surfaceDistance;
+    }
+
+    Vector3 RaycastToTarget(Transform target)
+    {
+        int layer = 10;
+ 
+        int layerMask = 1 << layer;
+        
+        RaycastHit hit;
+
+        Vector3 targetDirection = target.position - transform.position;
+
+        
+        if (Physics.Raycast(transform.position, targetDirection, out hit, Mathf.Infinity, layerMask))
+        {
+            Debug.Log(hit.transform.gameObject);
+            return hit.point;
+        }
+        Debug.DrawRay(transform.position, targetDirection, Color.red, Mathf.Infinity);
+        
+        return Vector3.zero;
     }
     
 

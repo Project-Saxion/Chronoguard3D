@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
+using Game.Scripts.Enemy;
 using Game.Scripts.Generic;
 using UnityEngine;
 
@@ -34,16 +35,18 @@ public class SavingGame : MonoBehaviour
         }
         Save save = new Save();
 
-        UpgradeController upgradeController = GetComponent<UpgradeController>();
-        MoneyController moneyController = GetComponent<MoneyController>();
+        UpgradeController upgradeController = GameObject.FindGameObjectWithTag("Manager").GetComponent<UpgradeController>();
+        MoneyController moneyController = GameObject.FindGameObjectWithTag("Manager").GetComponent<MoneyController>();
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         GameObject tower = GameObject.FindGameObjectWithTag("Base");
         HealthController healthControllerPlayer = player.GetComponent<HealthController>();
         HealthController healthControllerBase = tower.GetComponent<HealthController>();
+        EnemySpawning enemySpawning = GameObject.FindGameObjectWithTag("Manager").GetComponent<EnemySpawning>();
         save.levels = upgradeController.getLevels();
         save.money = moneyController.GetMoney();
         save.healthPlayer = healthControllerPlayer.GetHealth();
         save.healthBase = healthControllerBase.GetHealth();
+        save.wave = enemySpawning.currentWave;
         
         
         
@@ -57,8 +60,8 @@ public class SavingGame : MonoBehaviour
 
     public void printValues()
     {
-        UpgradeController upgradeController = GetComponent<UpgradeController>();
-        MoneyController moneyController = GetComponent<MoneyController>();
+        UpgradeController upgradeController = GameObject.FindGameObjectWithTag("Manager").GetComponent<UpgradeController>();
+        MoneyController moneyController = GameObject.FindGameObjectWithTag("Manager").GetComponent<MoneyController>();
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         GameObject tower = GameObject.FindGameObjectWithTag("Base");
         HealthController healthControllerPlayer = player.GetComponent<HealthController>();
@@ -81,13 +84,14 @@ public class SavingGame : MonoBehaviour
             Save save = (Save)bf.Deserialize(file);
             file.Close();
             
-            UpgradeController upgradeController = GetComponent<UpgradeController>();
-            MoneyController moneyController = GetComponent<MoneyController>();
+            UpgradeController upgradeController = GameObject.FindGameObjectWithTag("Manager").GetComponent<UpgradeController>();
+            MoneyController moneyController = GameObject.FindGameObjectWithTag("Manager").GetComponent<MoneyController>();
             GameObject player = GameObject.FindGameObjectWithTag("Player");
             GameObject tower = GameObject.FindGameObjectWithTag("Base");
             HealthController healthControllerPlayer = player.GetComponent<HealthController>();
             HealthController healthControllerBase = tower.GetComponent<HealthController>();
-
+            EnemySpawning enemySpawning = GameObject.FindGameObjectWithTag("Manager").GetComponent<EnemySpawning>();
+            
             moneyController.AddMoney(1000000);
             upgradeController.UpgradeBaseHp(save.levels[0]);
             upgradeController.UpgradeTurret(0, save.levels[1]);
@@ -99,6 +103,8 @@ public class SavingGame : MonoBehaviour
             moneyController.RemoveMoney(moneyController.GetMoney() - save.money);
             healthControllerPlayer.SetHealth(save.healthBase);
             healthControllerBase.SetHealth(save.healthPlayer);
+            enemySpawning.currentWave = save.wave;
+            
             
             Debug.Log("loaded value: " + save.levels[0]);
         }
@@ -119,5 +125,15 @@ public class SavingGame : MonoBehaviour
         {
             Debug.Log("No game saved!");
         }
+    }
+    
+    public bool TryGetSave(string save)
+    {
+        if (File.Exists(Application.persistentDataPath + "/" + save + ".save"))
+        {
+            return true;
+        }
+
+        return false;
     }
 }

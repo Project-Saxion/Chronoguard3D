@@ -13,6 +13,7 @@ public class CameraController : MonoBehaviour
     public float cameraRotationX;
 
     private Vector3 velocity = Vector3.zero;
+    private bool isFollowing;
 
     private void Update()
     {
@@ -30,6 +31,11 @@ public class CameraController : MonoBehaviour
     void RotateCamera()
     {
         transform.rotation = Quaternion.Euler(cameraRotationX, player.transform.rotation.y, 0);
+    }
+
+    public void SetFollowing(bool newFollowState)
+    {
+        isFollowing = newFollowState;
     }
     
 }
