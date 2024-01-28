@@ -3387,7 +3387,7 @@ PrefabInstance:
     - target: {fileID: 7762733746640599891, guid: 96feef02d72cf9a4099d409642ba883d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 409.4
+      value: 422.7
       objectReference: {fileID: 0}
     - target: {fileID: 7762733746640599891, guid: 96feef02d72cf9a4099d409642ba883d,
         type: 3}
@@ -3397,7 +3397,7 @@ PrefabInstance:
     - target: {fileID: 7762733746640599891, guid: 96feef02d72cf9a4099d409642ba883d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 458.24
+      value: 467.8
       objectReference: {fileID: 0}
     - target: {fileID: 7762733746640599891, guid: 96feef02d72cf9a4099d409642ba883d,
         type: 3}
@@ -5489,13 +5489,13 @@ MonoBehaviour:
   parentObject: {fileID: 850057583}
   enemies:
   - {fileID: 6151912278808942232, guid: f4c0138afdb64c64199c6a4c22e18213, type: 3}
-  - {fileID: 5701702961339348261, guid: b758fe81fa7ee704baf22ea72f378459, type: 3}
   - {fileID: 6921159028298351446, guid: c961739b18ac9d4498ea2a23e78ddf61, type: 3}
+  - {fileID: 5701702961339348261, guid: b758fe81fa7ee704baf22ea72f378459, type: 3}
   radius: 100
   numberOfPoints: 1000
   healthEnemy: 10
   scalingPercentage: 1.2
-  setValueScaling: 25
+  setValueScaling: 20
   startPointAmount: 10
   enemySpawnHeight: 12
   currentWave: 1
@@ -5594,8 +5594,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd508a73fe1f26546a8ef78dc4ed6a9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type1chance: 8
-  type2chance: 5
+  type1chance: 10
+  type2chance: 6
   type3chance: 2
 --- !u!114 &1132299810
 MonoBehaviour:
@@ -7528,6 +7528,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 912947771132185120, guid: 99b2df011403fc041bf6c4cb900a13f7,
+        type: 3}
+      propertyPath: attackDamage
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 989229340939675826, guid: 99b2df011403fc041bf6c4cb900a13f7,
         type: 3}
       propertyPath: m_Layer
@@ -7838,6 +7843,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 4141968358880285452, guid: 99b2df011403fc041bf6c4cb900a13f7,
+        type: 3}
+      propertyPath: attackDamage
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 4327615775415275485, guid: 99b2df011403fc041bf6c4cb900a13f7,
         type: 3}
       propertyPath: m_Layer
@@ -8108,6 +8118,11 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Untagged
       objectReference: {fileID: 0}
+    - target: {fileID: 6792224694285224607, guid: 99b2df011403fc041bf6c4cb900a13f7,
+        type: 3}
+      propertyPath: attackDamage
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 6931197687569440492, guid: 99b2df011403fc041bf6c4cb900a13f7,
         type: 3}
       propertyPath: m_Layer
@@ -8347,6 +8362,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8691477801042603581, guid: 99b2df011403fc041bf6c4cb900a13f7,
+        type: 3}
+      propertyPath: attackDamage
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8849363084685523366, guid: 99b2df011403fc041bf6c4cb900a13f7,
         type: 3}

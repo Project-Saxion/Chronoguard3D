@@ -122,9 +122,9 @@ namespace Game.Scripts.Enemy
                         spawnEnemy.GetComponent<HealthController>().SetHealth(healthEnemy * 2);
                     } else if (i == 1)
                     {
-                        spawnEnemy.GetComponent<HealthController>().SetHealth(healthEnemy * 3);
-                    } else {
                         spawnEnemy.GetComponent<HealthController>().SetHealth(healthEnemy * 1);
+                    } else {
+                        spawnEnemy.GetComponent<HealthController>().SetHealth(healthEnemy * 3);
                     }
                 }
             }

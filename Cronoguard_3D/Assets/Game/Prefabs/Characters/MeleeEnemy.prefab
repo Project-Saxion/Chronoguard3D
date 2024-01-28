@@ -94,7 +94,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f60b8fa4b2e097a4386fb2bf4ed13083, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 5
+  attackDamage: 1
 --- !u!195 &7756526235728983046
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -472,7 +472,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145884, guid: f725d918129d69848a395da5d3d992a3, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 480248, guid: f725d918129d69848a395da5d3d992a3, type: 3}
       propertyPath: m_LocalPosition.x
